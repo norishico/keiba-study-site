@@ -312,7 +312,7 @@ main {
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--border2);
-  background: #fff;
+  background: var(--bg4);
 }
 .course-img img {
   width: 100%;
@@ -388,6 +388,9 @@ main {
   color: var(--text2);
   letter-spacing: .06em;
   border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 .data-table td {
   padding: 10px 14px;
@@ -396,36 +399,6 @@ main {
 }
 .data-table tr:hover td { background: rgba(255,255,255,0.02); }
 .table-wrapper { overflow-x: auto; }
-
-/* ─── AFFINITY GRID (legacy support) ─── */
-.affinity-grid {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 13px;
-}
-.affinity-grid th {
-  background: var(--bg4);
-  padding: 10px 14px;
-  font-size: 11px; font-weight: 600;
-  color: var(--text2);
-  border-bottom: 1px solid var(--border);
-}
-.affinity-grid td {
-  padding: 10px 14px;
-  border-bottom: 1px solid rgba(30,34,53,0.6);
-  text-align: center;
-}
-.affinity-grid .rank-best { color: var(--gold); font-weight: 700; font-size: 16px; }
-.affinity-grid .rank-good { color: var(--green); font-weight: 700; font-size: 16px; }
-.affinity-grid .rank-fair { color: var(--text3); font-weight: 700; font-size: 16px; }
-.affinity-grid .row-header {
-  background: var(--bg4);
-  font-weight: 600;
-  text-align: left;
-  white-space: nowrap;
-  color: var(--text);
-}
 
 /* ─── BIAS BAR CHART ─── */
 .bias-section { margin-bottom: 24px; }
@@ -825,6 +798,29 @@ a.glossary-link {
 }
 a.glossary-link:hover {
   color: #fff;
+}
+
+/* ─── FOCUS STATES ─── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+a:focus-visible, .btn:focus-visible, .venue-tab:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.quiz-choices li:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+
+/* ─── QUIZ RESULT BUTTONS ─── */
+.quiz-result-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
 }
 
 /* ─── FOOTER ─── */
