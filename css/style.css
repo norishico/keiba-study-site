@@ -851,8 +851,8 @@ a.glossary-link:hover {
   .course-grid { grid-template-columns: 1fr; }
   .card { padding: 16px; }
   .course-card { padding: 14px 16px; }
-  .data-table { font-size: 11px; min-width: 420px; }
-  .data-table th, .data-table td { padding: 8px 8px; }
+  .data-table { font-size: 11px; min-width: auto; }
+  .data-table th, .data-table td { padding: 6px 6px; word-break: break-all; }
   .next-page { flex-direction: column; }
   .next-page a { min-width: 100%; }
   .example { padding: 16px; }

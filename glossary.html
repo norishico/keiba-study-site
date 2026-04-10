@@ -41,47 +41,40 @@
       </div>
       <div class="body-text">競馬では距離ごとに呼び名があり、出馬表やスポーツ紙で頻繁に使われます。覚えておくとレース選びの判断が早くなります。</div>
 
-      <div class="table-wrapper">
-        <table class="data-table">
-          <thead>
-            <tr><th>呼び名</th><th>距離</th><th>代表的なレース</th><th>求められる能力</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="color:var(--gold);font-weight:600">スプリント</td>
-              <td>1000〜1200m</td>
-              <td>スプリンターズS、高松宮記念</td>
-              <td>純粋なスピード。一瞬の加速力が勝負を決める</td>
-            </tr>
-            <tr>
-              <td style="color:var(--gold);font-weight:600">マイル</td>
-              <td>1600m</td>
-              <td>安田記念、マイルCS、NHKマイルC</td>
-              <td>スピード＋持続力。最も層が厚い距離帯</td>
-            </tr>
-            <tr>
-              <td style="color:var(--gold);font-weight:600">中距離</td>
-              <td>1800〜2000m</td>
-              <td>天皇賞秋(2000m)、大阪杯(2000m)</td>
-              <td>スピードとスタミナのバランス</td>
-            </tr>
-            <tr>
-              <td style="color:var(--gold);font-weight:600">中長距離（クラシック）</td>
-              <td>2200〜2500m</td>
-              <td>日本ダービー(2400m)、有馬記念(2500m)</td>
-              <td>スタミナ＋末脚。G1の王道距離</td>
-            </tr>
-            <tr>
-              <td style="color:var(--gold);font-weight:600">長距離（ステイヤー）</td>
-              <td>3000m以上</td>
-              <td>菊花賞(3000m)、天皇賞春(3200m)</td>
-              <td>圧倒的なスタミナ。折り合いの技術も重要</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-accent" style="background:var(--red)"></div>
+          <div class="card-title">スプリント（1000〜1200m）</div>
+          <div class="card-text">純粋なスピード勝負。一瞬の加速力が勝負を決める。</div>
+          <div class="card-horses"><div class="card-horse-label">代表レース</div><div class="horse-tags"><span class="htag htag-gold">スプリンターズS</span><span class="htag htag-gold">高松宮記念</span></div></div>
+        </div>
+        <div class="card">
+          <div class="card-accent" style="background:var(--orange)"></div>
+          <div class="card-title">マイル（1600m）</div>
+          <div class="card-text">スピード＋持続力。最も層が厚い距離帯。</div>
+          <div class="card-horses"><div class="card-horse-label">代表レース</div><div class="horse-tags"><span class="htag htag-gold">安田記念</span><span class="htag htag-gold">マイルCS</span></div></div>
+        </div>
+        <div class="card">
+          <div class="card-accent" style="background:var(--green)"></div>
+          <div class="card-title">中距離（1800〜2000m）</div>
+          <div class="card-text">スピードとスタミナのバランス。</div>
+          <div class="card-horses"><div class="card-horse-label">代表レース</div><div class="horse-tags"><span class="htag htag-gold">天皇賞秋</span><span class="htag htag-gold">大阪杯</span></div></div>
+        </div>
+        <div class="card">
+          <div class="card-accent" style="background:var(--blue)"></div>
+          <div class="card-title">中長距離（2200〜2500m）</div>
+          <div class="card-text">スタミナ＋末脚。G1の王道距離。</div>
+          <div class="card-horses"><div class="card-horse-label">代表レース</div><div class="horse-tags"><span class="htag htag-gold">日本ダービー</span><span class="htag htag-gold">有馬記念</span></div></div>
+        </div>
+        <div class="card">
+          <div class="card-accent" style="background:var(--purple)"></div>
+          <div class="card-title">長距離（3000m以上）</div>
+          <div class="card-text">圧倒的なスタミナ。折り合いの技術も重要。</div>
+          <div class="card-horses"><div class="card-horse-label">代表レース</div><div class="horse-tags"><span class="htag htag-gold">菊花賞</span><span class="htag htag-gold">天皇賞春</span></div></div>
+        </div>
       </div>
 
-      <div class="point-box"><strong>覚え方：</strong>「マイル＝1600m」だけ覚えればOK。それより短ければスプリント、1つ長ければ中距離、2つ長ければクラシック、3000m以上はステイヤー。</div>
+      <div class="point-box"><strong>覚え方：</strong>「マイル＝1600m」だけ覚えればOK。それより短ければスプリント、少し長ければ中距離、ダービーの距離なら中長距離、3000m以上はステイヤー。</div>
     </div>
 
     <!-- 血統用語 -->
@@ -94,18 +87,18 @@
       <div class="table-wrapper">
         <table class="data-table">
           <thead>
-            <tr><th>用語</th><th>読み方</th><th>意味</th></tr>
+            <tr><th>用語</th><th>意味</th></tr>
           </thead>
           <tbody>
-            <tr><td style="color:var(--gold);font-weight:600">系統（系）</td><td>けいとう</td><td>特定の種牡馬を頂点とする血の流れのグループ。「サンデー系」「ロベルト系」など。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">種牡馬</td><td>しゅぼば</td><td>繁殖に使われるオスの馬。産駒（子供）の能力に大きく影響する。出馬表の「父」欄に載っている馬。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">産駒</td><td>さんく</td><td>特定の種牡馬の子供たち。「ディープ産駒」＝ディープインパクトを父に持つ馬。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">母父</td><td>ぼふ</td><td>母親の父親。出馬表の「母の父」欄に記載。ブルードメアサイアー（BMS）とも呼ぶ。父と同様に重要な予想ファクター。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">サイアーライン</td><td>—</td><td>父→子→孫と父系で繋がる血統の流れ。「ディープインパクト→キズナ」はサイアーラインが繋がっている。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">ニックス</td><td>—</td><td>相性の良い血統の組み合わせ。「父サンデー系×母父ミスプロ系」など、特定の掛け合わせで名馬が多く出る現象。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">主流血統</td><td>—</td><td>日本競馬でシェアが高い血統。主にサンデーサイレンス系。勝率は高いが人気になりやすくオッズは低め。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">非主流血統</td><td>—</td><td>主流以外の血統。特定条件で高回収率を示すことがあり、穴馬探しの鍵になる。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">早熟・晩成</td><td>そうじゅく・ばんせい</td><td>早熟型は2〜3歳で活躍し古馬で衰える。晩成型はその逆で、古馬になって本格化する。血統によって傾向がある。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">系統（けいとう）</td><td>特定の種牡馬を頂点とする血の流れのグループ。「サンデー系」「ロベルト系」など。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">種牡馬（しゅぼば）</td><td>繁殖に使われるオスの馬。産駒の能力に大きく影響する。出馬表の「父」欄に載っている馬。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">産駒（さんく）</td><td>特定の種牡馬の子供たち。「ディープ産駒」＝ディープインパクトを父に持つ馬。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">母父（ぼふ）</td><td>母親の父親。出馬表の「母の父」欄に記載。ブルードメアサイアー（BMS）とも呼ぶ。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">サイアーライン</td><td>父→子→孫と父系で繋がる血統の流れ。「ディープ→キズナ」はサイアーラインが繋がっている。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">ニックス</td><td>相性の良い血統の組み合わせ。特定の掛け合わせで名馬が多く出る現象。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">主流血統</td><td>日本競馬でシェアが高い血統。主にサンデーサイレンス系。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">非主流血統</td><td>主流以外の血統。特定条件で高回収率を示すことがあり、穴馬探しの鍵。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">早熟・晩成</td><td>早熟型は2〜3歳で活躍し古馬で衰える。晩成型はその逆。血統によって傾向がある。</td></tr>
           </tbody>
         </table>
       </div>
@@ -121,16 +114,16 @@
       <div class="table-wrapper">
         <table class="data-table">
           <thead>
-            <tr><th>用語</th><th>読み方</th><th>意味</th></tr>
+            <tr><th>用語</th><th>意味</th></tr>
           </thead>
           <tbody>
-            <tr><td style="color:var(--gold);font-weight:600">芝</td><td>しば</td><td>天然の芝生の上を走るコース。日本競馬の主流。野芝（本州）と洋芝（北海道）がある。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">ダート</td><td>—</td><td>砂の上を走るコース。パワーが求められ、芝とは求められる能力が全く異なる。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">洋芝</td><td>ようしば</td><td>札幌・函館で使用される欧州型の芝。野芝より深く、時計がかかりやすい。欧州系血統が有利。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">馬場状態</td><td>ばばじょうたい</td><td>良・稍重・重・不良の4段階。雨が降るほど重くなり、求められる血統・能力が変わる。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">クッション値</td><td>—</td><td>JRAが公表している馬場の硬さ指標。数値が高いほど硬い馬場。スピード型は硬い馬場、パワー型は柔らかい馬場が有利。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">上がり3F</td><td>あがりさんハロン</td><td>ゴールまでの残り600mのタイム。末脚の切れ味を測る最重要指標。「上がり最速」＝そのレースで最も速い末脚を使った馬。</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">内枠・外枠</td><td>うちわく・そとわく</td><td>スタート位置。内枠（1〜4番）は距離ロスが少ないが包まれやすい。外枠（13番〜）はその逆。ダートでは外枠が有利。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">芝（しば）</td><td>天然の芝生の上を走るコース。日本競馬の主流。野芝（本州）と洋芝（北海道）がある。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">ダート</td><td>砂の上を走るコース。パワーが求められ、芝とは求められる能力が全く異なる。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">洋芝（ようしば）</td><td>札幌・函館で使用される欧州型の芝。時計がかかりやすく欧州系血統が有利。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">馬場状態</td><td>良・稍重・重・不良の4段階。雨が降るほど重くなり、求められる血統が変わる。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">クッション値</td><td>JRAが公表する馬場の硬さ指標。高いほど硬く、スピード型が有利。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">上がり3F</td><td>ゴールまで残り600mのタイム。末脚の切れ味を測る最重要指標。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">内枠・外枠</td><td>内枠は距離ロスが少ないが包まれやすい。ダートでは外枠が有利。</td></tr>
           </tbody>
         </table>
       </div>
@@ -146,13 +139,13 @@
       <div class="table-wrapper">
         <table class="data-table">
           <thead>
-            <tr><th>脚質</th><th>位置</th><th>特徴</th><th>有利なコース</th></tr>
+            <tr><th>脚質</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <tr><td style="color:var(--gold);font-weight:600">逃げ</td><td>先頭</td><td>スタートから先頭に立って逃げ切る。ペースを自分で作れるのが強み</td><td>小回り・直線が短いコース</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">先行</td><td>2〜5番手</td><td>先頭集団のすぐ後ろに付ける。最も安定しやすい脚質</td><td>中山・福島・小倉</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">差し</td><td>中団</td><td>中団に待機し直線で加速。末脚の切れ味で勝負</td><td>東京・京都・阪神外回り</td></tr>
-            <tr><td style="color:var(--gold);font-weight:600">追込</td><td>後方</td><td>最後方から一気に差し切る。展開に左右されやすいがハマると大穴</td><td>直線が長いコース</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">逃げ</td><td>先頭でレースを引っ張る。小回り・直線が短いコースで有利。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">先行</td><td>2〜5番手で追走。最も安定しやすい脚質。中山・福島・小倉で特に有利。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">差し</td><td>中団に待機し直線で加速。東京・京都・阪神外回りで有利。</td></tr>
+            <tr><td style="color:var(--gold);font-weight:600;white-space:nowrap">追込</td><td>最後方から一気に差し切る。直線が長いコースで有利。ハマると大穴。</td></tr>
           </tbody>
         </table>
       </div>
