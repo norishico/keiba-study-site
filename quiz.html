@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>理解度クイズ - ノリシコ競馬塾</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="index.html">トップ</a></li>
+      <li><a href="pedigree.html">血統</a></li>
+      <li><a href="course.html">コース</a></li>
+      <li><a href="affinity.html">期待値</a></li>
+      <li><a href="quiz.html" class="active">クイズ</a></li>
+      <li><a href="glossary.html">用語集</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-header">
+      <h1>理解度<em>クイズ</em></h1>
+      <p>100問からランダム10問 — どれだけ身についたか腕試し</p>
+    </div>
+
+    <div class="quiz-container">
+      <div id="quiz-genre-select" class="quiz-genre">
+        <div class="body-text" style="text-align:center;margin-bottom:16px">出題ジャンルを選んでください</div>
+        <div class="card-grid" style="max-width:500px;margin:0 auto">
+          <div class="card" style="cursor:pointer" onclick="startQuiz('全ジャンル')">
+            <div class="card-title">全ジャンル</div>
+            <div class="card-text">血統・コース・期待値すべてから出題。総合力を試す。</div>
+          </div>
+          <div class="card" style="cursor:pointer;border-left:3px solid var(--gold)" onclick="startQuiz('血統')">
+            <div class="card-title">血統</div>
+            <div class="card-text">3大系統・種牡馬の特徴・得意距離など血統の基礎知識。</div>
+          </div>
+          <div class="card" style="cursor:pointer;border-left:3px solid var(--blue)" onclick="startQuiz('コース')">
+            <div class="card-title">コース</div>
+            <div class="card-text">各競馬場の特徴・有利な枠順・馬場状態の影響など。</div>
+          </div>
+          <div class="card" style="cursor:pointer;border-left:3px solid var(--green)" onclick="startQuiz('総合')">
+            <div class="card-title">総合（血統×コース）</div>
+            <div class="card-text">期待値・距離変更・馬場状態と血統の組み合わせなど実践的な問題。</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="quiz-area" style="display:none">
+        <div class="quiz-progress">
+          <span id="quiz-progress-text">1 / 10</span>
+          <div class="progress-bar">
+            <div class="progress-fill" id="quiz-progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div id="quiz-feedback" class="quiz-feedback"></div>
+
+        <div class="quiz-question">
+          <div id="quiz-badges"></div>
+          <h3 id="quiz-question-text"></h3>
+          <ul class="quiz-choices" id="quiz-choices"></ul>
+          <div class="quiz-explanation" id="quiz-explanation"></div>
+          <div class="quiz-next" id="quiz-next">
+            <button class="btn" onclick="nextQuestion()">次の問題へ</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="quiz-result" class="quiz-result" style="display: none;">
+        <h2>クイズ結果</h2>
+        <div class="score" id="result-score"></div>
+        <div class="score-detail" id="result-pct"></div>
+        <div class="result-message" id="result-message"></div>
+        <div id="result-links" style="margin:16px 0"></div>
+        <div class="result-mistakes" id="result-mistakes"></div>
+        <button class="btn" onclick="resetQuiz()">もう一度挑戦</button>
+        <button class="btn" style="background:var(--bg4);color:var(--text);margin-left:8px" onclick="backToGenre()">ジャンル選択に戻る</button>
+      </div>
+    </div>
+    <div class="next-page">
+      <a href="affinity.html">
+        <div class="np-label">実践で使うなら</div>
+        <div class="np-title">期待値条件を探す →</div>
+      </a>
+      <a href="pedigree.html">
+        <div class="np-label">復習するなら</div>
+        <div class="np-title">血統入門ガイド →</div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>ノリシコ競馬塾</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

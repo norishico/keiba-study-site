@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>血統入門ガイド — のりお競馬塾</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08090d;--bg2:#0f1118;--bg3:#151822;--bg4:#1c2030;
+  --border:#1e2235;--border2:#252a3e;
+  --text:#dde4f0;--text2:#7a869a;--text3:#3a4255;
+  --gold:#e8b84b;--gold2:#c49a2a;--gold-dim:rgba(232,184,75,0.08);
+  --green:#3ecf72;--blue:#4da6ff;--red:#f56060;--purple:#a78bfa;--orange:#fb923c;
+  --serif:'Shippori Mincho',serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:52px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.8}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;min-height:340px;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:56px 48px 48px;overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 70% 30%,rgba(232,184,75,0.07) 0%,transparent 70%),
+             radial-gradient(ellipse 50% 80% at 10% 80%,rgba(77,166,255,0.04) 0%,transparent 60%),
+             linear-gradient(160deg,#08090d 0%,#0e1020 100%);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:48px 48px;opacity:.35;
+}
+.hero-badge{
+  display:inline-block;border:1px solid var(--gold2);color:var(--gold);
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:4px 14px;border-radius:2px;margin-bottom:20px;position:relative;
+  background:rgba(232,184,75,0.06);
+}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(28px,5vw,46px);font-weight:700;
+  line-height:1.25;color:#fff;position:relative;letter-spacing:-.01em;
+}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero-sub{position:relative;color:var(--text2);font-size:14px;margin-top:14px;max-width:520px}
+.hero-meta{position:relative;display:flex;gap:20px;margin-top:28px;flex-wrap:wrap}
+.hero-chip{
+  font-size:11px;color:var(--text2);background:var(--bg3);
+  border:1px solid var(--border2);border-radius:4px;padding:4px 12px;
+}
+
+/* ─── NAV ─── */
+.nav-wrap{
+  position:sticky;top:0;z-index:50;background:rgba(8,9,13,0.92);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--border);
+  overflow-x:auto;white-space:nowrap;
+}
+.nav-inner{display:flex;padding:0 32px;gap:0}
+.nav-inner a{
+  color:var(--text2);text-decoration:none;font-size:12px;font-weight:500;
+  padding:14px 16px;border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;display:inline-block;
+}
+.nav-inner a:hover{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* ─── LAYOUT ─── */
+.main{max-width:860px;margin:0 auto;padding:48px 32px 80px}
+.chapter{margin-bottom:72px}
+.ch-label{
+  display:flex;align-items:center;gap:10px;margin-bottom:24px;
+  padding-bottom:16px;border-bottom:1px solid var(--border);
+}
+.ch-num{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  color:var(--gold);background:var(--gold-dim);border:1px solid rgba(232,184,75,0.2);
+  padding:3px 10px;border-radius:3px;letter-spacing:.06em;flex-shrink:0;
+}
+.ch-title{font-family:var(--serif);font-size:22px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.ch-title em{color:var(--gold);font-style:normal}
+.body-text{color:var(--text);font-size:14px;line-height:1.9;margin-bottom:20px}
+.body-text+.body-text{margin-top:-4px}
+
+/* ─── CARDS ─── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:24px 0}
+.card{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:10px;
+  padding:18px;position:relative;overflow:hidden;transition:border-color .2s;
+}
+.card:hover{border-color:var(--border)}
+.card-accent{
+  position:absolute;top:0;left:0;right:0;height:3px;border-radius:10px 10px 0 0;
+}
+.card-icon{font-size:22px;margin-bottom:10px}
+.card-title{font-weight:700;font-size:14px;color:#fff;margin-bottom:6px}
+.card-text{font-size:12px;color:var(--text2);line-height:1.75}
+.card-horses{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.card-horse-label{font-size:10px;color:var(--text3);letter-spacing:.06em;margin-bottom:4px;text-transform:uppercase}
+.horse-tags{display:flex;flex-wrap:wrap;gap:4px}
+.htag{font-size:11px;padding:2px 8px;border-radius:3px;font-weight:500}
+
+/* ─── COURSE TABLE ─── */
+.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:24px 0}
+.course-card{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:10px;
+  padding:16px 18px;
+}
+.course-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.course-badge{
+  font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;
+  flex-shrink:0;font-family:var(--mono);
+}
+.course-name{font-weight:700;font-size:14px;color:#fff}
+.course-specs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.spec{font-size:10px;color:var(--text2);background:var(--bg4);padding:2px 8px;border-radius:3px;border:1px solid var(--border)}
+.course-desc{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px}
+.course-blood{margin-top:8px}
+.blood-label{font-size:10px;color:var(--text3);letter-spacing:.06em;margin-bottom:5px;text-transform:uppercase}
+.blood-row{display:flex;gap:6px;flex-wrap:wrap}
+.blood-tag{font-size:11px;padding:2px 8px;border-radius:3px;font-weight:500}
+.good{background:rgba(62,207,114,0.12);color:#3ecf72;border:1px solid rgba(62,207,114,0.25)}
+.bad{background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)}
+
+/* ─── EXAMPLE BOX ─── */
+.example{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:10px;
+  padding:20px 22px;margin:20px 0;
+}
+.example-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.ex-badge{
+  font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--gold);
+  background:var(--gold-dim);border:1px solid rgba(232,184,75,0.2);
+  padding:3px 10px;border-radius:3px;text-transform:uppercase;flex-shrink:0;
+}
+.ex-title{font-weight:700;font-size:14px;color:#fff}
+.ex-body{font-size:13px;color:var(--text2);line-height:1.8}
+.ex-body strong{color:var(--gold);font-weight:600}
+.ex-body em{color:var(--green);font-style:normal;font-weight:500}
+
+/* ─── POINT BOX ─── */
+.point-box{
+  border-left:3px solid var(--gold);padding:14px 18px;
+  background:var(--gold-dim);border-radius:0 8px 8px 0;margin:20px 0;
+  font-size:13px;color:var(--text);line-height:1.8;
+}
+.point-box strong{color:var(--gold)}
+
+/* ─── COMPARISON TABLE ─── */
+.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:13px}
+.comp-table th{
+  background:var(--bg4);padding:10px 14px;text-align:left;
+  font-size:11px;font-weight:600;color:var(--text2);letter-spacing:.06em;
+  border-bottom:1px solid var(--border);text-transform:uppercase;
+}
+.comp-table td{padding:10px 14px;border-bottom:1px solid rgba(30,34,53,0.6);color:var(--text)}
+.comp-table tr:last-child td{border-bottom:none}
+.comp-table tr:hover td{background:rgba(255,255,255,0.02)}
+
+/* ─── GLOSSARY ─── */
+.glossary{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin:20px 0}
+.gloss-item{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:14px 16px;
+}
+.gloss-term{font-weight:700;color:var(--gold);font-size:13px;margin-bottom:4px}
+.gloss-def{font-size:12px;color:var(--text2);line-height:1.7}
+
+/* ─── EV BOX ─── */
+.ev-box{
+  background:linear-gradient(135deg,rgba(232,184,75,0.06) 0%,rgba(77,166,255,0.04) 100%);
+  border:1px solid rgba(232,184,75,0.2);border-radius:12px;
+  padding:24px;margin:20px 0;
+}
+.ev-box-title{font-family:var(--serif);font-size:18px;color:var(--gold);margin-bottom:14px;font-weight:700}
+.ev-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px}
+.ev-row:last-child{margin-bottom:0}
+.ev-num{
+  font-family:var(--mono);font-size:13px;color:var(--gold);font-weight:700;
+  background:var(--gold-dim);border:1px solid rgba(232,184,75,0.2);
+  width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.ev-text{font-size:13px;color:var(--text);line-height:1.8}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ─── MOBILE OPTIMIZATION ─── */
+@media (max-width: 640px) {
+  .hero { padding: 32px 20px 32px; min-height: auto; }
+  .hero h1 { font-size: 24px; line-height: 1.3; }
+  .hero-sub { font-size: 13px; }
+  .hero-meta { gap: 8px; }
+  .hero-chip { font-size: 11px; padding: 4px 10px; }
+
+  .nav-inner { padding: 0 12px; }
+  .nav-inner a { padding: 14px 10px; font-size: 12px; }
+
+  .main { padding: 28px 16px 60px; }
+  .chapter { margin-bottom: 52px; }
+  .ch-title { font-size: 18px; }
+  .body-text { font-size: 14px; line-height: 1.85; }
+
+  /* カードを1列に */
+  .cards { grid-template-columns: 1fr; gap: 12px; }
+  .course-grid { grid-template-columns: 1fr; gap: 12px; }
+  .glossary { grid-template-columns: 1fr; gap: 10px; }
+
+  /* テーブルをスクロール可能に */
+  .comp-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .comp-table { min-width: 520px; font-size: 12px; }
+  .comp-table th, .comp-table td { padding: 8px 10px; }
+
+  /* EXAMPLEボックスの余白調整 */
+  .example { padding: 16px; }
+  .ev-box { padding: 18px 16px; }
+  .point-box { padding: 12px 14px; font-size: 13px; }
+
+  /* カード内の余白 */
+  .card { padding: 16px; }
+  .course-card { padding: 14px 16px; }
+  .gloss-item { padding: 12px 14px; }
+
+  /* 文字サイズ調整 */
+  .ex-body { font-size: 13px; }
+  .ev-text { font-size: 13px; }
+  .card-text { font-size: 13px; }
+  .course-desc { font-size: 13px; }
+  .gloss-def { font-size: 12px; }
+
+  /* horse-tags 折り返し改善 */
+  .horse-tags { gap: 5px; }
+  .htag { font-size: 12px; }
+  .blood-row { gap: 5px; }
+  .blood-tag { font-size: 12px; }
+
+  /* ヒーローグリッドを間引く */
+  .hero-grid { background-size: 32px 32px; opacity: .2; }
+}
+
+/* タブレット対応 */
+@media (max-width: 860px) and (min-width: 641px) {
+  .main { padding: 36px 24px 60px; }
+  .hero { padding: 40px 28px 36px; }
+}
+
+/* タップターゲット拡大（スマホ全般） */
+@media (hover: none) and (pointer: coarse) {
+  .nav-inner a { padding: 16px 12px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-badge">のりお競馬塾 ✦ ギャル委員会監修</div>
+  <h1>血統入門ガイド<br><em>読んだその日から予想に使える</em></h1>
+  <div class="hero-sub">「血統って難しそう」と思っていた人へ。現役馬の実例と一緒に、予想に使えるレベルまで7章で解説します。</div>
+  <div class="hero-meta">
+    <div class="hero-chip">全7章 + 巻末用語集</div>
+    <div class="hero-chip">現役G1馬の実例多数</div>
+    <div class="hero-chip">コース解説付き</div>
+    <div class="hero-chip">EV思考と接続</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <a href="#ch1">第1章</a>
+    <a href="#ch2">第2章</a>
+    <a href="#ch3">第3章</a>
+    <a href="#ch4">第4章</a>
+    <a href="#ch5">第5章</a>
+    <a href="#ch6">第6章</a>
+    <a href="#ch7">第7章</a>
+    <a href="#glossary">用語集</a>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══ 第1章 ═══ -->
+<div class="chapter" id="ch1">
+  <div class="ch-label">
+    <div class="ch-num">第1章</div>
+    <div class="ch-title">血統とは何か？ — <em>3分でわかる基本</em></div>
+  </div>
+
+  <div class="body-text">競馬の「血統」とは、ひとことで言えば<strong>「その馬がどの馬の子孫か」</strong>を示す家系図のことです。人間でも「運動神経がいい家系」「背が高い家系」があるように、馬にも「スピードに優れた系統」「スタミナが豊富な系統」「重い馬場が得意な系統」があります。</div>
+
+  <div class="body-text">出馬表を見ると、各馬の欄に<strong>「父」「母」「母の父（母父）」</strong>という情報が載っています。予想で最も重要なのは「父」と「母父」の2つ。この2つを押さえるだけで血統予想の8割はカバーできます。</div>
+
+  <div class="example">
+    <div class="example-head">
+      <div class="ex-badge">読み方の例</div>
+      <div class="ex-title">ドウデュースの血統表</div>
+    </div>
+    <div class="ex-body">
+      父：<strong>ハーツクライ</strong>（サンデーサイレンス系）<br>
+      母父：<strong>Dandy Man</strong>（ノーザンダンサー系）<br><br>
+      → 「ハーツクライ産駒は東京の長距離に強い」という傾向があり、<em>2022年・2024年の日本ダービーを制覇</em>したのも納得の血統。スタミナと切れ味を兼ね備えたサンデー系の代表格。
+    </div>
+  </div>
+
+  <div class="point-box"><strong>ポイント：</strong>血統はあくまで「傾向と確率」の話です。「この血統だから絶対強い」ではなく、「この条件ではこの血統が統計的に有利」という視点で使うのが正しい使い方です。</div>
+</div>
+
+<!-- ═══ 第2章 ═══ -->
+<div class="chapter" id="ch2">
+  <div class="ch-label">
+    <div class="ch-num">第2章</div>
+    <div class="ch-title"><em>3大系統</em>を覚える</div>
+  </div>
+
+  <div class="body-text">日本競馬の現役馬の大半は、この3つの系統のいずれかに属しています。まずここだけ覚えれば十分です。</div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(90deg,#e8b84b,#c49a2a)"></div>
+      <div class="card-icon">☀️</div>
+      <div class="card-title">サンデーサイレンス系</div>
+      <div class="card-text">日本競馬の主流。芝の中距離〜長距離で圧倒的なシェア。切れ味・末脚の持続力に優れる。良馬場・高速馬場で真価を発揮。</div>
+      <div class="card-horses">
+        <div class="card-horse-label">主な種牡馬</div>
+        <div class="horse-tags">
+          <span class="htag" style="background:rgba(232,184,75,0.12);color:#e8b84b;border:1px solid rgba(232,184,75,0.25)">ディープインパクト</span>
+          <span class="htag" style="background:rgba(232,184,75,0.12);color:#e8b84b;border:1px solid rgba(232,184,75,0.25)">ハーツクライ</span>
+          <span class="htag" style="background:rgba(232,184,75,0.12);color:#e8b84b;border:1px solid rgba(232,184,75,0.25)">エピファネイア</span>
+          <span class="htag" style="background:rgba(232,184,75,0.12);color:#e8b84b;border:1px solid rgba(232,184,75,0.25)">キズナ</span>
+          <span class="htag" style="background:rgba(232,184,75,0.12);color:#e8b84b;border:1px solid rgba(232,184,75,0.25)">モーリス</span>
+        </div>
+        <div class="card-horse-label" style="margin-top:8px">現役代表馬</div>
+        <div class="horse-tags">
+          <span class="htag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">ドウデュース</span>
+          <span class="htag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">チェルヴィニア</span>
+          <span class="htag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">レガレイラ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(90deg,#4da6ff,#2563eb)"></div>
+      <div class="card-icon">🌊</div>
+      <div class="card-title">ミスタープロスペクター系</div>
+      <div class="card-text">スピードとパワーを兼備。ダート戦で特に強く、スプリント〜マイルでも活躍。芝でも短距離寄りのコースが得意。</div>
+      <div class="card-horses">
+        <div class="card-horse-label">主な種牡馬</div>
+        <div class="horse-tags">
+          <span class="htag" style="background:rgba(77,166,255,0.12);color:#4da6ff;border:1px solid rgba(77,166,255,0.25)">ロードカナロア</span>
+          <span class="htag" style="background:rgba(77,166,255,0.12);color:#4da6ff;border:1px solid rgba(77,166,255,0.25)">ドゥラメンテ</span>
+          <span class="htag" style="background:rgba(77,166,255,0.12);color:#4da6ff;border:1px solid rgba(77,166,255,0.25)">キングカメハメハ</span>
+        </div>
+        <div class="card-horse-label" style="margin-top:8px">現役代表馬</div>
+        <div class="horse-tags">
+          <span class="htag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">イクイノックス（母父）</span>
+          <span class="htag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">ソダシ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(90deg,#a78bfa,#7c3aed)"></div>
+      <div class="card-icon">🌿</div>
+      <div class="card-title">ノーザンダンサー系</div>
+      <div class="card-text">欧州型のスタミナ・パワー血統。重馬場や洋芝で真価を発揮。ハービンジャー・フランケルなど欧州からの輸入種牡馬が代表格。</div>
+      <div class="card-horses">
+        <div class="card-horse-label">主な種牡馬</div>
+        <div class="horse-tags">
+          <span class="htag" style="background:rgba(167,139,250,0.12);color:#a78bfa;border:1px solid rgba(167,139,250,0.25)">ハービンジャー</span>
+          <span class="htag" style="background:rgba(167,139,250,0.12);color:#a78bfa;border:1px solid rgba(167,139,250,0.25)">Frankel</span>
+          <span class="htag" style="background:rgba(167,139,250,0.12);color:#a78bfa;border:1px solid rgba(167,139,250,0.25)">ガリレオ</span>
+        </div>
+        <div class="card-horse-label" style="margin-top:8px">現役代表馬</div>
+        <div class="horse-tags">
+          <span class="htag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">ブローザホーン</span>
+          <span class="htag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">ローシャムパーク</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head">
+      <div class="ex-badge">実例</div>
+      <div class="ex-title">イクイノックス（2022〜2023年の最強馬）</div>
+    </div>
+    <div class="ex-body">
+      父：<strong>キタサンブラック</strong>（サンデー系）/ 母父：<strong>キングカメハメハ</strong>（MP系）<br><br>
+      サンデー系の芝適性とMP系のパワー・スピードを両立。<em>天皇賞秋・ジャパンカップ・有馬記念を制覇</em>したのは「どんな馬場・距離でも対応できるハイブリッド血統」だったから。芝中距離のあらゆる舞台で圧倒的な実力を示した。
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 第3章 ═══ -->
+<div class="chapter" id="ch3">
+  <div class="ch-label">
+    <div class="ch-num">第3章</div>
+    <div class="ch-title">非主流血統の逆襲 — <em>穴を開ける血の正体</em></div>
+  </div>
+
+  <div class="body-text">主流のサンデー系が苦手とする条件で激走するのが「非主流血統」です。人気落ちで出走してくることが多く、的中したときの配当が大きい＝EV（期待値）が高いのが特徴です。</div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(90deg,#f56060,#dc2626)"></div>
+      <div class="card-icon">💪</div>
+      <div class="card-title">ロベルト系</div>
+      <div class="card-text">パワーと根性が特徴。小回り・急坂・タフな馬場で真価を発揮。サンデー系が苦手とする消耗戦で浮上する。シンボリクリスエス・スクリーンヒーローが代表。</div>
+      <div class="card-horses">
+        <div class="card-horse-label">得意な条件</div>
+        <div class="horse-tags">
+          <span class="htag" style="background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)">中山芝</span>
+          <span class="htag" style="background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)">重・不良馬場</span>
+          <span class="htag" style="background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)">洋芝</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(90deg,#fb923c,#ea580c)"></div>
+      <div class="card-icon">🏜️</div>
+      <div class="card-title">シニスターミニスター系</div>
+      <div class="card-text">ダート向きの非主流血統。芝では人気にならないが、ダート・特に重馬場で爆発力を持つ。ROIデータでも単回106%・複回131%と安定した実績。</div>
+      <div class="card-horses">
+        <div class="card-horse-label">得意な条件</div>
+        <div class="horse-tags">
+          <span class="htag" style="background:rgba(251,146,60,0.12);color:#fb923c;border:1px solid rgba(251,146,60,0.25)">ダート全般</span>
+          <span class="htag" style="background:rgba(251,146,60,0.12);color:#fb923c;border:1px solid rgba(251,146,60,0.25)">福島・小倉ダ</span>
+          <span class="htag" style="background:rgba(251,146,60,0.12);color:#fb923c;border:1px solid rgba(251,146,60,0.25)">重馬場</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(90deg,#3ecf72,#16a34a)"></div>
+      <div class="card-icon">🌧️</div>
+      <div class="card-title">欧州型（ハービンジャー等）</div>
+      <div class="card-text">重馬場・洋芝で圧倒的な適性を示す。良馬場では人気になりにくく、天候が崩れたときに大化けするパターンが多い。穴馬候補の筆頭格。</div>
+      <div class="card-horses">
+        <div class="card-horse-label">得意な条件</div>
+        <div class="horse-tags">
+          <span class="htag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">洋芝（札幌・函館）</span>
+          <span class="htag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">重・不良馬場</span>
+          <span class="htag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">長距離</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head">
+      <div class="ex-badge">実例</div>
+      <div class="ex-title">ブローザホーン — 2024年宝塚記念制覇</div>
+    </div>
+    <div class="ex-body">
+      父：<strong>エピファネイア</strong>（サンデー系）/ 母父：<strong>ハービンジャー</strong>（欧州ノーザンダンサー系）<br><br>
+      2024年宝塚記念は稍重馬場。人気馬が次々と凡走するなか、<em>15番人気で激走・単勝6,390円</em>。母父ハービンジャーの重馬場適性が完璧にはまった。「雨が降ったらハービンジャー母父を疑え」の典型例。
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 第4章 ═══ -->
+<div class="chapter" id="ch4">
+  <div class="ch-label">
+    <div class="ch-num">第4章</div>
+    <div class="ch-title">コース × 血統の<em>相性マップ</em></div>
+  </div>
+
+  <div class="body-text">コースの特性（直線の長さ・坂の有無・芝の種類）と血統の特性は深く連動しています。同じ芝1600mでも東京と中山では求められる能力が全く異なります。</div>
+
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-head">
+        <div class="course-badge" style="background:rgba(232,184,75,0.12);color:#e8b84b;border:1px solid rgba(232,184,75,0.25)">東京</div>
+        <div class="course-name">東京競馬場</div>
+      </div>
+      <div class="course-specs">
+        <span class="spec">直線525m（最長級）</span>
+        <span class="spec">急坂1回</span>
+        <span class="spec">左回り</span>
+        <span class="spec">野芝</span>
+      </div>
+      <div class="course-desc">日本最長の直線で末脚の持続力が問われる。直線で加速しながらゴールまで脚が持つ「切れ＋持続力型」が有利。スローからの瞬発力勝負になりやすい。</div>
+      <div class="course-blood">
+        <div class="blood-label">有利な血統</div>
+        <div class="blood-row">
+          <span class="blood-tag good">ディープ系</span>
+          <span class="blood-tag good">ハーツクライ系</span>
+          <span class="blood-tag good">キズナ産駒</span>
+          <span class="blood-tag good">モーリス産駒</span>
+        </div>
+        <div class="blood-label" style="margin-top:8px">不利な血統</div>
+        <div class="blood-row">
+          <span class="blood-tag bad">小回り向きパワー型</span>
+          <span class="blood-tag bad">ロベルト系</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-head">
+        <div class="course-badge" style="background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)">中山</div>
+        <div class="course-name">中山競馬場</div>
+      </div>
+      <div class="course-specs">
+        <span class="spec">直線310m（短め）</span>
+        <span class="spec">急坂2回</span>
+        <span class="spec">右回り</span>
+        <span class="spec">野芝</span>
+      </div>
+      <div class="course-desc">直線が短く急坂が2回。コーナーワークとパワーが重要で、小回りを立ち回れる先行力型が有利。瞬発力より持続力・根性が問われる。</div>
+      <div class="course-blood">
+        <div class="blood-label">有利な血統</div>
+        <div class="blood-row">
+          <span class="blood-tag good">ロベルト系</span>
+          <span class="blood-tag good">ステイゴールド系</span>
+          <span class="blood-tag good">ゴールドシップ産駒</span>
+        </div>
+        <div class="blood-label" style="margin-top:8px">不利な血統</div>
+        <div class="blood-row">
+          <span class="blood-tag bad">末脚一辺倒の差し型</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-head">
+        <div class="course-badge" style="background:rgba(77,166,255,0.1);color:#4da6ff;border:1px solid rgba(77,166,255,0.2)">阪神</div>
+        <div class="course-name">阪神競馬場</div>
+      </div>
+      <div class="course-specs">
+        <span class="spec">外回り直線473m</span>
+        <span class="spec">内回り直線356m</span>
+        <span class="spec">急坂あり</span>
+        <span class="spec">右回り</span>
+      </div>
+      <div class="course-desc">外回りは東京に近い特性、内回りは中山に近い特性。コースによって求められる能力が異なる。坂があるためスタミナ型も台頭しやすい。</div>
+      <div class="course-blood">
+        <div class="blood-label">外回り有利</div>
+        <div class="blood-row">
+          <span class="blood-tag good">ディープ系</span>
+          <span class="blood-tag good">エピファネイア産駒</span>
+        </div>
+        <div class="blood-label" style="margin-top:8px">内回り有利</div>
+        <div class="blood-row">
+          <span class="blood-tag good">パワー型</span>
+          <span class="blood-tag good">ロベルト系</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-head">
+        <div class="course-badge" style="background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2)">京都</div>
+        <div class="course-name">京都競馬場</div>
+      </div>
+      <div class="course-specs">
+        <span class="spec">直線404m</span>
+        <span class="spec">淀の坂（3コーナー）</span>
+        <span class="spec">右回り</span>
+        <span class="spec">野芝</span>
+      </div>
+      <div class="course-desc">3コーナーの下り坂でスピードが乗りやすく、差し追込が決まりやすい。長距離では淀の坂で先行馬が消耗しやすく、スタミナ型が浮上するパターンが多い。</div>
+      <div class="course-blood">
+        <div class="blood-label">有利な血統</div>
+        <div class="blood-row">
+          <span class="blood-tag good">ディープ系</span>
+          <span class="blood-tag good">ハーツクライ系</span>
+          <span class="blood-tag good">長距離はスタミナ型</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-head">
+        <div class="course-badge" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">札幌・函館</div>
+        <div class="course-name">北海道（洋芝）</div>
+      </div>
+      <div class="course-specs">
+        <span class="spec">洋芝（欧州型芝）</span>
+        <span class="spec">時計かかる馬場</span>
+        <span class="spec">夏開催</span>
+        <span class="spec">平坦コース</span>
+      </div>
+      <div class="course-desc">野芝と異なる洋芝コース。芝が深く時計がかかりやすい。欧州血統が特に適性を示す特殊な舞台。夏競馬は非主流血統の穴場。</div>
+      <div class="course-blood">
+        <div class="blood-label">有利な血統</div>
+        <div class="blood-row">
+          <span class="blood-tag good">ハービンジャー系</span>
+          <span class="blood-tag good">欧州ND系</span>
+          <span class="blood-tag good">ブラックタイド系</span>
+        </div>
+        <div class="blood-label" style="margin-top:8px">苦手な血統</div>
+        <div class="blood-row">
+          <span class="blood-tag bad">高速馬場専門型</span>
+          <span class="blood-tag bad">スプリント特化型</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-head">
+        <div class="course-badge" style="background:rgba(251,146,60,0.1);color:#fb923c;border:1px solid rgba(251,146,60,0.2)">ダート全般</div>
+        <div class="course-name">ダートコース</div>
+      </div>
+      <div class="course-specs">
+        <span class="spec">砂コース</span>
+        <span class="spec">パワー重視</span>
+        <span class="spec">雨で高速化</span>
+      </div>
+      <div class="course-desc">芝とは全く異なる適性が問われる。スピードよりパワーが重要で、MP系・非主流血統が台頭しやすい。重馬場では砂が締まり時計が速くなる（芝と逆）。</div>
+      <div class="course-blood">
+        <div class="blood-label">有利な血統</div>
+        <div class="blood-row">
+          <span class="blood-tag good">シニスターミニスター</span>
+          <span class="blood-tag good">ゴールドアリュール系</span>
+          <span class="blood-tag good">ヘニーヒューズ系</span>
+          <span class="blood-tag good">クロフネ系</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head">
+      <div class="ex-badge">実例</div>
+      <div class="ex-title">リバティアイランド — 2023年牝馬三冠</div>
+    </div>
+    <div class="ex-body">
+      父：<strong>ドゥラメンテ</strong>（MP系）/ 母父：<strong>マンハッタンカフェ</strong>（サンデー系）<br><br>
+      桜花賞（阪神外回り）・オークス（東京長距離）・秋華賞（京都内回り）を全制覇。<em>どのコースでも対応できたのは父ドゥラメンテのパワー×スピードと、母父のスタミナ的な掛け合わせ</em>によるもの。「万能型のハイブリッド血統」の好例。
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 第5章 ═══ -->
+<div class="chapter" id="ch5">
+  <div class="ch-label">
+    <div class="ch-num">第5章</div>
+    <div class="ch-title">馬場状態と血統 — <em>天気で変わる有利不利</em></div>
+  </div>
+
+  <div class="body-text">雨が降ると馬場状態が変わり、得意・不得意の血統が大きく入れ替わります。「人気馬が凡走して非主流が激走」するパターンの多くは、馬場変化が原因です。</div>
+
+  <div class="comp-table-wrap"><table class="comp-table">
+    <thead>
+      <tr><th>馬場状態</th><th>芝の特性</th><th>有利な血統</th><th>不利な血統</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>良（晴れ）</td><td>高速馬場・切れ味重視</td><td>サンデー系・ディープ系</td><td>パワー型・欧州系</td></tr>
+      <tr><td>稍重</td><td>やや力がいる馬場</td><td>体力型サンデー系</td><td>軽い馬場専門型</td></tr>
+      <tr><td>重・不良</td><td>パワー重視・時計かかる</td><td>ロベルト系・欧州ND系・ハービンジャー</td><td>ディープ系・高速馬場専門型</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="example">
+    <div class="example-head">
+      <div class="ex-badge">実例</div>
+      <div class="ex-title">ディープインパクト産駒の重馬場</div>
+    </div>
+    <div class="ex-body">
+      ディープインパクト産駒は良馬場で圧倒的な強さを誇りますが、重馬場になると<em>回収率が大きく落ちる</em>傾向があります。人気になりやすいため「雨が降ったらディープ系の人気馬は少し割引」という見方ができます。<br><br>
+      逆に<strong>ノリシコのROIデータで「ディープインパクト 芝 重：単回193%」</strong>という結果も出ており、「走る個体は重でも走る」という側面もあります。一概には切れないのが血統の奥深さです。
+    </div>
+  </div>
+
+  <div class="point-box"><strong>クッション値との関係：</strong>JRAが2020年から発表しているクッション値（馬場の硬さ指標）と血統を組み合わせると、より精密な馬場適性の判断ができます。硬い馬場（高クッション値）はスピード型が、柔らかい馬場（低クッション値）はパワー型が有利になる傾向があります。</div>
+</div>
+
+<!-- ═══ 第6章 ═══ -->
+<div class="chapter" id="ch6">
+  <div class="ch-label">
+    <div class="ch-num">第6章</div>
+    <div class="ch-title">血統 × 騎手・厩舎の<em>相性</em></div>
+  </div>
+
+  <div class="body-text">血統と騎手・厩舎には相性があります。特定の騎手が特定の血統を乗り慣れていたり、厩舎が得意とする種牡馬の産駒を多く管理していたりします。</div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(90deg,#e8b84b,#c49a2a)"></div>
+      <div class="card-icon">🏆</div>
+      <div class="card-title">武豊 × ディープ系</div>
+      <div class="card-text">日本競馬史上最高の騎手とサンデー系の最強種牡馬の組み合わせ。ブエナビスタ・ジェンティルドンナなど数多くの名馬とコンビを組んできた。</div>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(90deg,#4da6ff,#2563eb)"></div>
+      <div class="card-icon">⚡</div>
+      <div class="card-title">川田将雅 × キズナ産駒</div>
+      <div class="card-text">キズナ産駒との相性が抜群。「折り合い名人」の川田とキズナ産駒のラストの切れ味が噛み合うパターンが多い。コース問わず安定した成績を残す。</div>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(90deg,#3ecf72,#16a34a)"></div>
+      <div class="card-icon">🌟</div>
+      <div class="card-title">ノーザンファーム × サンデー系</div>
+      <div class="card-text">日本最大の生産牧場で、サンデー系の名馬を次々と輩出。ノーザンF生産＋サンデー系の組み合わせは、近年の重賞で圧倒的な存在感を示している。</div>
+    </div>
+  </div>
+
+  <div class="point-box"><strong>乗り替わりの見方：</strong>一流騎手（ルメール・川田・戸崎など）への乗り替わりはプラスシグナルになることが多いです。特に「前走凡走→乗り替わり→一流騎手」のパターンは「厩舎が本気で勝ちにきた」サインと読めることがあります。</div>
+</div>
+
+<!-- ═══ 第7章 ═══ -->
+<div class="chapter" id="ch7">
+  <div class="ch-label">
+    <div class="ch-num">第7章</div>
+    <div class="ch-title">EVに使う血統の見方 — <em>のりお流の実践編</em></div>
+  </div>
+
+  <div class="body-text">ここまで学んだ血統の知識を、ノリシコAIのEV思考と結びつけます。「知っていても市場に織り込まれた情報はEVが低い」「大衆が見落とした情報こそEVが高い」という視点が重要です。</div>
+
+  <div class="ev-box">
+    <div class="ev-box-title">💡 血統でEVを見つける3つの視点</div>
+    <div class="ev-row">
+      <div class="ev-num">1</div>
+      <div class="ev-text"><strong>有名すぎる血統はオッズに織り込み済み</strong><br>「ディープ産駒は東京芝が得意」は誰もが知っている。だからオッズが下がり、EV的においしくない場合が多い。</div>
+    </div>
+    <div class="ev-row">
+      <div class="ev-num">2</div>
+      <div class="ev-text"><strong>新興種牡馬×特定コースが狙い目</strong><br>エピファネイア・モーリス・ドゥラメンテなど2015年以降にデビューした種牡馬は、コース別データがまだ薄い。大衆が気づく前に傾向を把握できればEVが生まれる。</div>
+    </div>
+    <div class="ev-row">
+      <div class="ev-num">3</div>
+      <div class="ev-text"><strong>非主流×特定条件の組み合わせを狙う</strong><br>「パイロ ダ 重：単回258%」「ハービンジャー系 重馬場：単回高騰」のような条件。人気になりにくい非主流血統が特定条件で高EVになる瞬間を見逃さない。</div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head">
+      <div class="ex-badge">実践例</div>
+      <div class="ex-title">「雨予報＋非主流血統の人気落ち馬」というシナリオ</div>
+    </div>
+    <div class="ex-body">
+      天気予報で当日が重馬場になると予測される場合——<br><br>
+      ① ノリシコAIのスコアを確認<br>
+      ② <strong>母父ハービンジャー系・ロベルト系の馬がスコア上位に入っているか確認</strong><br>
+      ③ その馬のオッズが人気馬（主にディープ系）より高めなら<em>EVが生まれる可能性がある</em><br>
+      ④ 買い条件（EV2.0以上・odds上限30倍）を満たせば購入対象<br><br>
+      血統の知識がスコアリングの「補強材料」として機能する状態になれば、AIと人間の目の組み合わせが最大限活きます。
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 用語集 ═══ -->
+<div class="chapter" id="glossary">
+  <div class="ch-label">
+    <div class="ch-num">巻末</div>
+    <div class="ch-title">用語集 / 主要種牡馬<em>早見表</em></div>
+  </div>
+
+  <div class="body-text" style="margin-bottom:16px">本ガイドで使った主な用語と、現役主要種牡馬の特徴をまとめました。</div>
+
+  <div class="glossary">
+    <div class="gloss-item"><div class="gloss-term">系統（系）</div><div class="gloss-def">特定の種牡馬を頂点とする血の流れのグループ。「サンデー系」「ロベルト系」など。</div></div>
+    <div class="gloss-item"><div class="gloss-term">種牡馬（しゅぼば）</div><div class="gloss-def">繁殖に使われるオスの馬。産駒（子供）の能力に大きく影響する。</div></div>
+    <div class="gloss-item"><div class="gloss-term">母父（ぼふ・はんとう）</div><div class="gloss-def">母親の父親。出馬表では「母の父」欄に記載。父と同様に重要な予想ファクター。</div></div>
+    <div class="gloss-item"><div class="gloss-term">産駒（さんく）</div><div class="gloss-def">特定の種牡馬の子供たち。「ディープインパクト産駒」＝ディープインパクトの子供。</div></div>
+    <div class="gloss-item"><div class="gloss-term">インブリード / クロス</div><div class="gloss-def">同じ祖先を複数回持つ配合。能力が強調されることがあるが、繊細さ・気難しさも出やすい。</div></div>
+    <div class="gloss-item"><div class="gloss-term">主流血統</div><div class="gloss-def">日本競馬でシェアが高く、強い馬を多く輩出している血統。主にサンデーサイレンス系。</div></div>
+    <div class="gloss-item"><div class="gloss-term">非主流血統</div><div class="gloss-def">主流以外の血統。特定の条件で高回収率を示すことがあり、穴馬探しの鍵になる。</div></div>
+    <div class="gloss-item"><div class="gloss-term">洋芝（ようしば）</div><div class="gloss-def">札幌・函館で使用される欧州型の芝。時計がかかりやすく欧州系血統が適性を示す。</div></div>
+    <div class="gloss-item"><div class="gloss-term">クッション値</div><div class="gloss-def">JRAが2020年から公表している馬場の硬さ指標。数値が高いほど硬い馬場。</div></div>
+    <div class="gloss-item"><div class="gloss-term">早熟・晩成</div><div class="gloss-def">早熟型は2〜3歳で活躍しやすく古馬になると衰える傾向。晩成型はその逆。血統によって傾向がある。</div></div>
+  </div>
+
+  <div style="margin-top:32px;padding:20px;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;font-size:12px;color:var(--text2);line-height:1.8">
+    📝 <strong style="color:var(--text)">このガイドについて</strong><br>
+    ギャル委員会（みなみ・れいな・ゆきこ・さくら・あかり・ひなた・まお）による監修。現役馬の情報は2024〜2025年時点のものです。血統傾向は統計的な確率であり、個体差・当日の状態・展開によって結果は異なります。ノリシコAIのkeiba.dbで実際のデータを照合することを推奨します。
+  </div>
+</div>
+
+</div><!-- /main -->
+</body>
+</html>

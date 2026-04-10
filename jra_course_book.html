@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JRA全コース教科書 — のりお競馬塾</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08090d;--bg2:#0f1118;--bg3:#151822;--bg4:#1c2030;
+  --border:#1e2235;--border2:#252a3e;
+  --text:#dde4f0;--text2:#7a869a;--text3:#3a4255;
+  --gold:#e8b84b;--gold2:#c49a2a;--gold-dim:rgba(232,184,75,0.08);
+  --green:#3ecf72;--blue:#4da6ff;--red:#f56060;--purple:#a78bfa;--orange:#fb923c;
+  --serif:'Shippori Mincho',serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:52px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.8;min-height:100vh}
+
+/* HERO */
+.hero{position:relative;padding:48px 32px 40px;border-bottom:1px solid var(--border);overflow:hidden;background:linear-gradient(160deg,#08090d 0%,#0e1020 100%)}
+.hero::before{content:'';position:absolute;top:-40%;right:-5%;width:500px;height:500px;background:radial-gradient(ellipse,rgba(232,184,75,0.07) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-block;border:1px solid var(--gold2);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:4px 14px;border-radius:2px;margin-bottom:18px;background:rgba(232,184,75,0.06)}
+.hero h1{font-family:var(--serif);font-size:clamp(24px,4vw,40px);font-weight:700;line-height:1.3;color:#fff;letter-spacing:-.01em}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero-sub{color:var(--text2);font-size:13px;margin-top:12px;max-width:500px;line-height:1.7}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.chip{font-size:11px;color:var(--text2);background:var(--bg3);border:1px solid var(--border2);border-radius:4px;padding:4px 12px}
+
+/* VENUE TABS */
+.venue-nav{position:sticky;top:0;z-index:50;background:rgba(8,9,13,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.venue-tabs{display:flex;overflow-x:auto;padding:0 16px;gap:2px;-webkit-overflow-scrolling:touch}
+.venue-tabs::-webkit-scrollbar{display:none}
+.vtab{flex-shrink:0;padding:14px 16px;font-size:12px;font-weight:600;color:var(--text2);border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;background:none;border-left:none;border-right:none;border-top:none}
+.vtab:hover{color:var(--text)}
+.vtab.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* MAIN */
+.main{max-width:920px;margin:0 auto;padding:36px 20px 80px}
+.venue-panel{display:none}
+.venue-panel.active{display:block}
+
+/* VENUE HEADER */
+.venue-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.venue-emblem{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.venue-info h2{font-family:var(--serif);font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+.venue-tags{display:flex;gap:6px;flex-wrap:wrap}
+.vtag{font-size:11px;padding:2px 9px;border-radius:3px;font-weight:500}
+
+/* COURSE SECTIONS */
+.section-title{font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* COURSE GRID */
+.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:8px}
+.course-card{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;overflow:hidden}
+.course-card-head{padding:14px 16px 10px;border-bottom:1px solid var(--border)}
+.course-dist{font-family:var(--mono);font-size:13px;font-weight:600;color:#fff}
+.course-type{font-size:11px;color:var(--text2);margin-top:2px}
+.course-card-body{padding:12px 16px}
+
+/* STATS ROW */
+.stats-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.stat{text-align:center}
+.stat-val{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold)}
+.stat-label{font-size:10px;color:var(--text3);margin-top:1px}
+
+/* PACE BAR */
+.pace-label{font-size:11px;color:var(--text2);margin-bottom:5px}
+.pace-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;gap:2px;margin-bottom:8px}
+.pace-seg{height:100%;border-radius:2px}
+
+/* STYLE ICONS */
+.style-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.style-tag{font-size:11px;padding:2px 8px;border-radius:3px;font-weight:500}
+.s-good{background:rgba(62,207,114,0.12);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)}
+.s-bad{background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)}
+.s-mid{background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)}
+.s-neutral{background:rgba(255,255,255,0.05);color:var(--text2);border:1px solid var(--border)}
+
+/* GATE */
+.gate-row{display:flex;gap:6px;align-items:center;margin-bottom:8px;font-size:12px;color:var(--text2)}
+.gate-icon{font-size:13px}
+
+/* BLOOD */
+.blood-mini{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.blood-m{font-size:11px;padding:2px 7px;border-radius:3px;background:rgba(232,184,75,0.1);color:var(--gold);border:1px solid rgba(232,184,75,0.2)}
+
+/* SVG COURSE MAP */
+.course-map-wrap{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:16px;margin-bottom:20px}
+.course-map-title{font-size:12px;color:var(--text2);margin-bottom:12px;font-weight:500}
+.maps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.map-item{text-align:center}
+.map-label{font-size:11px;color:var(--text3);margin-top:6px}
+
+/* OVERVIEW TABLE */
+.overview-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border2);margin-top:12px}
+.overview-table{width:100%;border-collapse:collapse;font-size:12px;min-width:600px}
+.overview-table th{background:var(--bg4);padding:10px 12px;text-align:left;font-size:11px;color:var(--text2);font-weight:600;letter-spacing:.05em;border-bottom:1px solid var(--border);white-space:nowrap}
+.overview-table td{padding:9px 12px;border-bottom:1px solid rgba(30,34,53,0.5);color:var(--text);vertical-align:top}
+.overview-table tr:last-child td{border-bottom:none}
+.overview-table tr:hover td{background:rgba(255,255,255,0.02)}
+.ot-venue{font-weight:600;color:#fff}
+.ot-dist{font-family:var(--mono);color:var(--text2);font-size:11px}
+
+/* BIAS BOX */
+.bias-box{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:16px;margin-bottom:16px}
+.bias-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:10px}
+.bias-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:12px}
+.bias-label{color:var(--text3);min-width:72px;flex-shrink:0}
+.bias-val{color:var(--text);flex:1}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .hero{padding:28px 16px 28px}
+  .hero h1{font-size:22px}
+  .main{padding:24px 12px 60px}
+  .course-grid{grid-template-columns:1fr}
+  .maps-grid{grid-template-columns:repeat(2,1fr)}
+  .vtab{padding:12px 12px;font-size:11px}
+  .venue-header{flex-direction:column;gap:10px}
+  .venue-emblem{width:44px;height:44px;font-size:20px}
+}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">のりお競馬塾 ✦ ギャル委員会監修</div>
+  <h1>JRA全コース<em>教科書</em></h1>
+  <div class="hero-sub">全10競馬場のコース特性・脚質傾向・枠順有利不利・得意血統を一冊に凝縮。血統ガイドと合わせて使えばEV予想の精度がさらに上がります。</div>
+  <div class="hero-chips">
+    <div class="chip">全10競馬場</div>
+    <div class="chip">コース図付き</div>
+    <div class="chip">脚質・枠順・血統データ</div>
+    <div class="chip">開幕週 vs 最終週バイアス</div>
+    <div class="chip">スマホ対応</div>
+  </div>
+</div>
+
+<!-- VENUE TABS -->
+<div class="venue-nav">
+  <div class="venue-tabs">
+    <button class="vtab active" onclick="showVenue('tokyo')">東京</button>
+    <button class="vtab" onclick="showVenue('nakayama')">中山</button>
+    <button class="vtab" onclick="showVenue('hanshin')">阪神</button>
+    <button class="vtab" onclick="showVenue('kyoto')">京都</button>
+    <button class="vtab" onclick="showVenue('chukyo')">中京</button>
+    <button class="vtab" onclick="showVenue('niigata')">新潟</button>
+    <button class="vtab" onclick="showVenue('fukushima')">福島</button>
+    <button class="vtab" onclick="showVenue('kokura')">小倉</button>
+    <button class="vtab" onclick="showVenue('sapporo')">札幌</button>
+    <button class="vtab" onclick="showVenue('hakodate')">函館</button>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════ 東京 ══════ -->
+<div class="venue-panel active" id="panel-tokyo">
+  <div class="venue-header">
+    <div class="venue-emblem" style="background:rgba(232,184,75,0.1)">🏙️</div>
+    <div class="venue-info">
+      <h2>東京競馬場</h2>
+      <div class="venue-tags">
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">左回り</span>
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">野芝</span>
+        <span class="vtag" style="background:rgba(232,184,75,0.1);color:#e8b84b;border:1px solid rgba(232,184,75,0.2)">直線525m（最長）</span>
+        <span class="vtag" style="background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2)">急坂1回</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bias-box">
+    <div class="bias-title">📋 東京競馬場の基本特性</div>
+    <div class="bias-row"><span class="bias-label">コースの特徴</span><span class="bias-val">日本最長の直線（525m）。直線入り口から急坂が1回あり、そこを超えてからゴールまで平坦。スタミナと末脚の持続力が問われる「本物の強さ」が必要なコース。</span></div>
+    <div class="bias-row"><span class="bias-label">開幕週</span><span class="bias-val">芝の状態が良好で高速馬場。内枠・先行馬が有利。スローペースになりやすく差しも届く。</span></div>
+    <div class="bias-row"><span class="bias-label">最終週</span><span class="bias-val">内ラチ沿いが荒れ、外を回る差し・追込馬が台頭しやすい。外枠の評価が上がる。</span></div>
+    <div class="bias-row"><span class="bias-label">雨・重馬場</span><span class="bias-val">時計がかかりパワー型が台頭。ディープ系の人気馬は少し割引。ロベルト系・欧州型に注意。</span></div>
+  </div>
+
+  <div class="section-title">主要コース詳細</div>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-head">
+        <div class="course-dist">芝 1400m</div>
+        <div class="course-type">直線長め・高速寄り</div>
+      </div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:30%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:20%;background:#f5c842">S</div></div>
+        <div class="style-row">
+          <span class="style-tag s-good">先行◎</span><span class="style-tag s-good">差し○</span><span class="style-tag s-bad">追込△</span>
+        </div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠やや有利。外枠でも直線が長いので差せる。</div>
+        <div class="blood-mini"><span class="blood-m">ロードカナロア系</span><span class="blood-m">ディープ系</span><span class="blood-m">キズナ</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head">
+        <div class="course-dist">芝 1600m（マイル）</div>
+        <div class="course-type">日本最高峰のマイル戦場</div>
+      </div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:20%;background:#4da6ff">H</div><div class="pace-seg" style="width:40%;background:#3ecf72">M</div><div class="pace-seg" style="width:40%;background:#f5c842">S</div></div>
+        <div class="style-row">
+          <span class="style-tag s-good">差し◎</span><span class="style-tag s-good">先行○</span><span class="style-tag s-mid">追込△</span>
+        </div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>スローになりやすく差し有利。内枠は序盤揉まれるリスク。</div>
+        <div class="blood-mini"><span class="blood-m">ディープ系</span><span class="blood-m">モーリス</span><span class="blood-m">グレーターロンドン</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head">
+        <div class="course-dist">芝 2000m</div>
+        <div class="course-type">天皇賞秋の舞台</div>
+      </div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:25%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:25%;background:#f5c842">S</div></div>
+        <div class="style-row">
+          <span class="style-tag s-good">差し◎</span><span class="style-tag s-good">先行○</span><span class="style-tag s-neutral">追込○</span>
+        </div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>スタートから最初のコーナーまで距離があり、枠の有利不利は比較的フラット。</div>
+        <div class="blood-mini"><span class="blood-m">ディープ系</span><span class="blood-m">ハーツクライ</span><span class="blood-m">エピファネイア</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head">
+        <div class="course-dist">芝 2400m</div>
+        <div class="course-type">日本ダービー・JC の舞台</div>
+      </div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:15%;background:#4da6ff">H</div><div class="pace-seg" style="width:55%;background:#3ecf72">M</div><div class="pace-seg" style="width:30%;background:#f5c842">S</div></div>
+        <div class="style-row">
+          <span class="style-tag s-good">差し◎</span><span class="style-tag s-good">先行○</span><span class="style-tag s-good">追込○</span>
+        </div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>長い直線で末脚の持続力が最も問われる。スタミナ型の差し馬が台頭しやすい。</div>
+        <div class="blood-mini"><span class="blood-m">ハーツクライ</span><span class="blood-m">ディープ系</span><span class="blood-m">キズナ</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head">
+        <div class="course-dist">ダート 1400m</div>
+        <div class="course-type">スプリント〜マイルのダート</div>
+      </div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:50%;background:#4da6ff">H</div><div class="pace-seg" style="width:40%;background:#3ecf72">M</div><div class="pace-seg" style="width:10%;background:#f5c842">S</div></div>
+        <div class="style-row">
+          <span class="style-tag s-good">逃げ◎</span><span class="style-tag s-good">先行○</span><span class="style-tag s-bad">差し△</span>
+        </div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠が断然有利。前半のポジション争いが激しい。</div>
+        <div class="blood-mini"><span class="blood-m">パイロ</span><span class="blood-m">コパノリッキー</span><span class="blood-m">ヘニーヒューズ</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head">
+        <div class="course-dist">ダート 2100m</div>
+        <div class="course-type">長距離ダート・スタミナ勝負</div>
+      </div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:30%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:20%;background:#f5c842">S</div></div>
+        <div class="style-row">
+          <span class="style-tag s-good">先行◎</span><span class="style-tag s-mid">差し○</span><span class="style-tag s-neutral">追込△</span>
+        </div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>距離が長いため枠の有利不利は薄れる。ゴールドアリュール系のスタミナ型が強い。</div>
+        <div class="blood-mini"><span class="blood-m">ゴールドアリュール</span><span class="blood-m">シニスターミニスター</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 中山 ══════ -->
+<div class="venue-panel" id="panel-nakayama">
+  <div class="venue-header">
+    <div class="venue-emblem" style="background:rgba(245,96,96,0.1)">⛰️</div>
+    <div class="venue-info">
+      <h2>中山競馬場</h2>
+      <div class="venue-tags">
+        <span class="vtag" style="background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)">右回り</span>
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">野芝</span>
+        <span class="vtag" style="background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)">直線310m（短め）</span>
+        <span class="vtag" style="background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2)">急坂2回</span>
+      </div>
+    </div>
+  </div>
+  <div class="bias-box">
+    <div class="bias-title">📋 中山競馬場の基本特性</div>
+    <div class="bias-row"><span class="bias-label">コースの特徴</span><span class="bias-val">直線が短く（310m）、急坂が2回あるタフなコース。コーナーが急でポジション争いが激しい。根性・パワー・先行力が問われる「個性派向け」の舞台。</span></div>
+    <div class="bias-row"><span class="bias-label">開幕週</span><span class="bias-val">内ラチ沿いが良好で先行・内枠が圧倒的有利。前が残りやすい。</span></div>
+    <div class="bias-row"><span class="bias-label">最終週</span><span class="bias-val">内側が荒れて外差しが届くようになる。ただし直線が短いため差しきれないケースも多い。</span></div>
+    <div class="bias-row"><span class="bias-label">雨・重馬場</span><span class="bias-val">パワー型がさらに有利に。ロベルト系・ステイゴールド系の根性型が激走しやすい。</span></div>
+  </div>
+  <div class="section-title">主要コース詳細</div>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1200m</div><div class="course-type">急坂スプリント・前有利</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:60%;background:#4da6ff">H</div><div class="pace-seg" style="width:35%;background:#3ecf72">M</div><div class="pace-seg" style="width:5%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎</span><span class="style-tag s-good">先行◎</span><span class="style-tag s-bad">差し✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠が圧倒的有利。外枠は致命的なハンデになることも。</div>
+        <div class="blood-mini"><span class="blood-m">ロードカナロア系</span><span class="blood-m">スプリント系</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1600m</div><div class="course-type">皐月賞トライアル等の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:35%;background:#4da6ff">H</div><div class="pace-seg" style="width:45%;background:#3ecf72">M</div><div class="pace-seg" style="width:20%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-mid">差し○</span><span class="style-tag s-bad">追込△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>外枠は序盤のポジション争いで消耗しやすい。内枠有利。</div>
+        <div class="blood-mini"><span class="blood-m">サンデー系</span><span class="blood-m">イスラボニータ</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2000m</div><div class="course-type">皐月賞・中山記念の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:40%;background:#4da6ff">H</div><div class="pace-seg" style="width:45%;background:#3ecf72">M</div><div class="pace-seg" style="width:15%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-mid">差し○</span><span class="style-tag s-bad">追込✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>スタートからすぐコーナー。内枠が圧倒的有利。外枠は大きなロスになる。</div>
+        <div class="blood-mini"><span class="blood-m">ロベルト系</span><span class="blood-m">ステイゴールド</span><span class="blood-m">ゴールドシップ</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2500m</div><div class="course-type">有馬記念の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:30%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:20%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-good">差し○</span><span class="style-tag s-mid">追込△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>多頭数で前が詰まりやすい。内枠の先行馬が最も有利なレイアウト。</div>
+        <div class="blood-mini"><span class="blood-m">ステイゴールド系</span><span class="blood-m">スタミナ型全般</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">ダート 1200m</div><div class="course-type">下り坂スタート・超ハイペース</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:80%;background:#4da6ff">H</div><div class="pace-seg" style="width:20%;background:#3ecf72">M</div><div class="pace-seg" style="width:0%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎</span><span class="style-tag s-good">先行○</span><span class="style-tag s-bad">差し✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>スタートから下り坂で前半ラップが異常に速い。他場の「速いタイム」は参考にならない。</div>
+        <div class="blood-mini"><span class="blood-m">シニスターミニスター</span><span class="blood-m">パイロ</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">ダート 1800m</div><div class="course-type">フェブラリーS等の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:40%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:10%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-good">逃げ○</span><span class="style-tag s-mid">差し△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠有利。スタートで良いポジションを取れた馬が最後まで残りやすい。</div>
+        <div class="blood-mini"><span class="blood-m">ゴールドアリュール</span><span class="blood-m">クロフネ系</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 阪神 ══════ -->
+<div class="venue-panel" id="panel-hanshin">
+  <div class="venue-header">
+    <div class="venue-emblem" style="background:rgba(251,146,60,0.1)">🌸</div>
+    <div class="venue-info">
+      <h2>阪神競馬場</h2>
+      <div class="venue-tags">
+        <span class="vtag" style="background:rgba(251,146,60,0.1);color:#fb923c;border:1px solid rgba(251,146,60,0.2)">右回り</span>
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">野芝</span>
+        <span class="vtag" style="background:rgba(251,146,60,0.1);color:#fb923c;border:1px solid rgba(251,146,60,0.2)">外回り直線473m</span>
+        <span class="vtag" style="background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)">内回り直線356m</span>
+      </div>
+    </div>
+  </div>
+  <div class="bias-box">
+    <div class="bias-title">📋 阪神競馬場の基本特性</div>
+    <div class="bias-row"><span class="bias-label">コースの特徴</span><span class="bias-val">内回りと外回りの2コースが存在。外回りは直線が長く東京に近い特性、内回りは直線が短く中山に近い特性。最後に急坂があるためスタミナも要求される。</span></div>
+    <div class="bias-row"><span class="bias-label">開幕週</span><span class="bias-val">高速馬場で内先行有利。外回りはスローになりやすく差しも届く。</span></div>
+    <div class="bias-row"><span class="bias-label">最終週</span><span class="bias-val">内側が荒れて外差しが決まりやすくなる。特に外回りコースで顕著。</span></div>
+    <div class="bias-row"><span class="bias-label">雨・重馬場</span><span class="bias-val">急坂があるためパワー型が有利。欧州系血統が浮上しやすい。</span></div>
+  </div>
+  <div class="section-title">主要コース詳細</div>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1600m（外）</div><div class="course-type">桜花賞・NHKマイルC前哨戦</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:25%;background:#4da6ff">H</div><div class="pace-seg" style="width:45%;background:#3ecf72">M</div><div class="pace-seg" style="width:30%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">差し◎</span><span class="style-tag s-good">先行○</span><span class="style-tag s-mid">追込△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>外回りで直線が長い。差し馬が届きやすく、内枠・外枠の有利不利は比較的小さい。</div>
+        <div class="blood-mini"><span class="blood-m">ディープ系</span><span class="blood-m">エピファネイア</span><span class="blood-m">ロードカナロア</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2000m（内）</div><div class="course-type">大阪杯・宝塚記念前哨戦</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:40%;background:#4da6ff">H</div><div class="pace-seg" style="width:45%;background:#3ecf72">M</div><div class="pace-seg" style="width:15%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-mid">差し○</span><span class="style-tag s-bad">追込✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内回りで直線が短い。先行馬が圧倒的に有利。内枠が大きなアドバンテージになる。</div>
+        <div class="blood-mini"><span class="blood-m">パワー型全般</span><span class="blood-m">ロベルト系</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2200m（外）</div><div class="course-type">宝塚記念の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:35%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:15%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-good">差し○</span><span class="style-tag s-mid">追込○</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>スタミナと急坂適性が問われる。重馬場になるとパワー型・欧州系が台頭。</div>
+        <div class="blood-mini"><span class="blood-m">ハービンジャー系</span><span class="blood-m">スタミナ型全般</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">ダート 1400m</div><div class="course-type">短距離ダートの激戦区</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:55%;background:#4da6ff">H</div><div class="pace-seg" style="width:35%;background:#3ecf72">M</div><div class="pace-seg" style="width:10%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎</span><span class="style-tag s-good">先行◎</span><span class="style-tag s-bad">差し△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠が有利。前半のハイペースを制した馬がそのまま押し切るパターンが多い。</div>
+        <div class="blood-mini"><span class="blood-m">シニスターミニスター</span><span class="blood-m">ヘニーヒューズ</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 京都 ══════ -->
+<div class="venue-panel" id="panel-kyoto">
+  <div class="venue-header">
+    <div class="venue-emblem" style="background:rgba(167,139,250,0.1)">⛩️</div>
+    <div class="venue-info">
+      <h2>京都競馬場</h2>
+      <div class="venue-tags">
+        <span class="vtag" style="background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2)">右回り</span>
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">野芝</span>
+        <span class="vtag" style="background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2)">直線404m</span>
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">淀の坂（3コーナー）</span>
+      </div>
+    </div>
+  </div>
+  <div class="bias-box">
+    <div class="bias-title">📋 京都競馬場の基本特性</div>
+    <div class="bias-row"><span class="bias-label">コースの特徴</span><span class="bias-val">3コーナーに「淀の坂」と呼ばれる上り坂があり、下り坂でスピードが乗る独特の構造。長距離では先行馬が坂で消耗しやすく差し・追込が届きやすい。</span></div>
+    <div class="bias-row"><span class="bias-label">開幕週</span><span class="bias-val">高速馬場で内枠・先行有利。スローペースになると差しが届きにくい。</span></div>
+    <div class="bias-row"><span class="bias-label">最終週</span><span class="bias-val">内ラチ沿いが荒れ外差しが届くようになる。長距離では特に差し馬台頭。</span></div>
+    <div class="bias-row"><span class="bias-label">雨・重馬場</span><span class="bias-val">坂の下りでスピードが乗りすぎず、パワー型が台頭しやすい。</span></div>
+  </div>
+  <div class="section-title">主要コース詳細</div>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1600m（外）</div><div class="course-type">マイルCS・秋華賞の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:20%;background:#4da6ff">H</div><div class="pace-seg" style="width:45%;background:#3ecf72">M</div><div class="pace-seg" style="width:35%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">差し◎</span><span class="style-tag s-good">先行○</span><span class="style-tag s-mid">追込○</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>淀の坂下りでスピードが乗り差し有利。スローになりやすいため末脚勝負になることが多い。</div>
+        <div class="blood-mini"><span class="blood-m">ディープ系</span><span class="blood-m">ハーツクライ系</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2200m（外）</div><div class="course-type">京都記念の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:25%;background:#4da6ff">H</div><div class="pace-seg" style="width:55%;background:#3ecf72">M</div><div class="pace-seg" style="width:20%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">差し◎</span><span class="style-tag s-good">先行○</span><span class="style-tag s-good">追込○</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>淀の坂を2回通過する距離設定。スタミナと坂適性が重要。</div>
+        <div class="blood-mini"><span class="blood-m">ハーツクライ</span><span class="blood-m">スタミナ型全般</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 3000m（外）</div><div class="course-type">菊花賞・天皇賞春の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:15%;background:#4da6ff">H</div><div class="pace-seg" style="width:60%;background:#3ecf72">M</div><div class="pace-seg" style="width:25%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">差し◎</span><span class="style-tag s-good">追込○</span><span class="style-tag s-mid">先行△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>坂を何度も通過する消耗戦。先行馬が後半失速しやすく差し・追込が決まりやすい特殊な距離。</div>
+        <div class="blood-mini"><span class="blood-m">ステイゴールド系</span><span class="blood-m">長距離スタミナ型</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">ダート 1800m</div><div class="course-type">中距離ダートの主戦場</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:35%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:15%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-mid">差し○</span><span class="style-tag s-neutral">逃げ△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠やや有利。平均的なペースになりやすく、力のある先行馬が粘りやすい。</div>
+        <div class="blood-mini"><span class="blood-m">ゴールドアリュール</span><span class="blood-m">シニスターミニスター</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 中京 ══════ -->
+<div class="venue-panel" id="panel-chukyo">
+  <div class="venue-header">
+    <div class="venue-emblem" style="background:rgba(62,207,114,0.1)">🌊</div>
+    <div class="venue-info">
+      <h2>中京競馬場</h2>
+      <div class="venue-tags">
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">左回り</span>
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">野芝</span>
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">直線412m</span>
+        <span class="vtag" style="background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2)">高低差3.5m</span>
+      </div>
+    </div>
+  </div>
+  <div class="bias-box">
+    <div class="bias-title">📋 中京競馬場の基本特性</div>
+    <div class="bias-row"><span class="bias-label">コースの特徴</span><span class="bias-val">左回りで直線が412m。最後の直線に急坂があり東京より短いがそれなりに差しが届く。コーナーがきつく外を回るとロスが大きい。</span></div>
+    <div class="bias-row"><span class="bias-label">開幕週</span><span class="bias-val">高速馬場で先行有利。内ラチ沿いを通れる馬が強い。</span></div>
+    <div class="bias-row"><span class="bias-label">最終週</span><span class="bias-val">内側が荒れて外差しが届きやすくなる。差し・追込の回収率が上がる傾向。</span></div>
+    <div class="bias-row"><span class="bias-label">雨・重馬場</span><span class="bias-val">急坂があるためパワー型が有利。ダートは水分を含むと高速化する。</span></div>
+  </div>
+  <div class="section-title">主要コース詳細</div>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1200m</div><div class="course-type">高松宮記念の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:50%;background:#4da6ff">H</div><div class="pace-seg" style="width:40%;background:#3ecf72">M</div><div class="pace-seg" style="width:10%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎</span><span class="style-tag s-good">先行○</span><span class="style-tag s-bad">差し△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠有利。スプリンターの適性が問われる純粋な速さ勝負。</div>
+        <div class="blood-mini"><span class="blood-m">ロードカナロア系</span><span class="blood-m">ファインニードル</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2000m</div><div class="course-type">金鯱賞・チャンピオンズC前哨戦</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:30%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:20%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-good">差し○</span><span class="style-tag s-mid">追込△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>コーナーがきつく外枠のロスが大きい。内枠の先行馬が有利。</div>
+        <div class="blood-mini"><span class="blood-m">キズナ</span><span class="blood-m">リアルスティール</span><span class="blood-m">ドレフォン</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">ダート 1800m</div><div class="course-type">チャンピオンズCの舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:45%;background:#4da6ff">H</div><div class="pace-seg" style="width:45%;background:#3ecf72">M</div><div class="pace-seg" style="width:10%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-good">逃げ○</span><span class="style-tag s-mid">差し△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠有利。前半のペースが速くなりやすくスタミナも要求される。</div>
+        <div class="blood-mini"><span class="blood-m">シニスターミニスター</span><span class="blood-m">ゴールドアリュール</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 新潟 ══════ -->
+<div class="venue-panel" id="panel-niigata">
+  <div class="venue-header">
+    <div class="venue-emblem" style="background:rgba(99,179,237,0.1)">🌾</div>
+    <div class="venue-info">
+      <h2>新潟競馬場</h2>
+      <div class="venue-tags">
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">左回り</span>
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">野芝</span>
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">直線658m（日本最長）</span>
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">坂なし（平坦）</span>
+      </div>
+    </div>
+  </div>
+  <div class="bias-box">
+    <div class="bias-title">📋 新潟競馬場の基本特性</div>
+    <div class="bias-row"><span class="bias-label">コースの特徴</span><span class="bias-val">外回りの直線は日本最長の658m。完全平坦で坂がなく、純粋なスピードと末脚の持続力が問われる。芝1000mという直線コースも存在する特殊な競馬場。</span></div>
+    <div class="bias-row"><span class="bias-label">開幕週</span><span class="bias-val">高速馬場で時計が速い。外差しが決まりやすい特殊な傾向がある（内が荒れやすいため）。</span></div>
+    <div class="bias-row"><span class="bias-label">最終週</span><span class="bias-val">馬場が荒れて時計がかかる。差し・追込が届きやすくなる。</span></div>
+    <div class="bias-row"><span class="bias-label">雨・重馬場</span><span class="bias-val">坂がないためパワー型への恩恵が他場より小さい。スピード型でも重馬場に強い配合なら対応可。</span></div>
+  </div>
+  <div class="section-title">主要コース詳細</div>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1000m（直線）</div><div class="course-type">日本唯一の直線コース</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:70%;background:#4da6ff">H</div><div class="pace-seg" style="width:30%;background:#3ecf72">M</div><div class="pace-seg" style="width:0%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎</span><span class="style-tag s-good">先行◎</span><span class="style-tag s-mid">差し△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>コーナーなし。外枠有利（直線コースのため内外のラチ差がなく外の方が走りやすい）。</div>
+        <div class="blood-mini"><span class="blood-m">スプリント特化型</span><span class="blood-m">ロードカナロア系</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1600m（外）</div><div class="course-type">長い直線の差し有利</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:15%;background:#4da6ff">H</div><div class="pace-seg" style="width:40%;background:#3ecf72">M</div><div class="pace-seg" style="width:45%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">差し◎</span><span class="style-tag s-good">追込○</span><span class="style-tag s-mid">先行△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>スローになりやすく差し・追込有利。外枠の差し馬を狙うのが新潟の基本戦略。</div>
+        <div class="blood-mini"><span class="blood-m">イスラボニータ</span><span class="blood-m">ラブリーデイ</span><span class="blood-m">ロードカナロア</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2200m（外）</div><div class="course-type">長距離戦の差し天国</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:10%;background:#4da6ff">H</div><div class="pace-seg" style="width:45%;background:#3ecf72">M</div><div class="pace-seg" style="width:45%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">差し◎</span><span class="style-tag s-good">追込◎</span><span class="style-tag s-bad">逃げ✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>スロー→ロンスパ戦になりやすい。末脚の持続力が問われる。逃げ馬は苦しくなる距離。</div>
+        <div class="blood-mini"><span class="blood-m">長距離スタミナ型</span><span class="blood-m">新潟芝2200m特化型</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 福島 ══════ -->
+<div class="venue-panel" id="panel-fukushima">
+  <div class="venue-header">
+    <div class="venue-emblem" style="background:rgba(245,96,96,0.1)">🌲</div>
+    <div class="venue-info">
+      <h2>福島競馬場</h2>
+      <div class="venue-tags">
+        <span class="vtag" style="background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)">右回り</span>
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">野芝</span>
+        <span class="vtag" style="background:rgba(245,96,96,0.1);color:#f56060;border:1px solid rgba(245,96,96,0.2)">直線292m（短い）</span>
+        <span class="vtag" style="background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2)">小回り</span>
+      </div>
+    </div>
+  </div>
+  <div class="bias-box">
+    <div class="bias-title">📋 福島競馬場の基本特性</div>
+    <div class="bias-row"><span class="bias-label">コースの特徴</span><span class="bias-val">直線が292mと非常に短い小回りコース。先行力・コーナーワークが最も重要。差し・追込がほとんど届かない。逃げ・先行馬の回収率が全競馬場でトップクラス。</span></div>
+    <div class="bias-row"><span class="bias-label">開幕週</span><span class="bias-val">高速馬場で内先行が圧倒的有利。前残りが多発する。</span></div>
+    <div class="bias-row"><span class="bias-label">最終週</span><span class="bias-val">それでも差しが届きにくい。ただし荒れた内を避けて外を回る馬が増える。</span></div>
+    <div class="bias-row"><span class="bias-label">逃げ・ダート</span><span class="bias-val">ノリシコROIデータで「逃げ×福島ダ：単回339%」という驚異的な数字が出ている最高の狙い目。</span></div>
+  </div>
+  <div class="section-title">主要コース詳細</div>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1200m</div><div class="course-type">小回りスプリント・逃げ天国</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:55%;background:#4da6ff">H</div><div class="pace-seg" style="width:40%;background:#3ecf72">M</div><div class="pace-seg" style="width:5%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎</span><span class="style-tag s-good">先行◎</span><span class="style-tag s-bad">差し✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠圧倒的有利。差しはほぼ届かない。逃げ馬を素直に評価すべきコース。</div>
+        <div class="blood-mini"><span class="blood-m">ファインニードル</span><span class="blood-m">シニスターミニスター</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2000m</div><div class="course-type">福島記念の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:40%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:10%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-good">逃げ○</span><span class="style-tag s-bad">追込✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>スタートすぐコーナー。内枠が大きなアドバンテージ。先行馬をしっかり評価する。</div>
+        <div class="blood-mini"><span class="blood-m">オルフェーヴル産駒</span><span class="blood-m">ルーラーシップ</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">ダート 1150m</div><div class="course-type">逃げ×ダートの最強コース</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:75%;background:#4da6ff">H</div><div class="pace-seg" style="width:25%;background:#3ecf72">M</div><div class="pace-seg" style="width:0%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎◎</span><span class="style-tag s-mid">先行○</span><span class="style-tag s-bad">差し✕✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>逃げの回収率が全コース中最高クラス。単回339%・複回259%（ノリシコDB実証済み）。</div>
+        <div class="blood-mini"><span class="blood-m">シニスターミニスター</span><span class="blood-m">パイロ</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 小倉 ══════ -->
+<div class="venue-panel" id="panel-kokura">
+  <div class="venue-header">
+    <div class="venue-emblem" style="background:rgba(251,146,60,0.1)">🌅</div>
+    <div class="venue-info">
+      <h2>小倉競馬場</h2>
+      <div class="venue-tags">
+        <span class="vtag" style="background:rgba(251,146,60,0.1);color:#fb923c;border:1px solid rgba(251,146,60,0.2)">右回り</span>
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">洋芝・野芝混合</span>
+        <span class="vtag" style="background:rgba(251,146,60,0.1);color:#fb923c;border:1px solid rgba(251,146,60,0.2)">直線293m</span>
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">平坦（坂なし）</span>
+      </div>
+    </div>
+  </div>
+  <div class="bias-box">
+    <div class="bias-title">📋 小倉競馬場の基本特性</div>
+    <div class="bias-row"><span class="bias-label">コースの特徴</span><span class="bias-val">直線293mと短く坂もない平坦の小回りコース。福島と似た特性で先行有利。夏開催が中心で洋芝と野芝の混合。逃げ・ダートの回収率が非常に高い。</span></div>
+    <div class="bias-row"><span class="bias-label">開幕週</span><span class="bias-val">内ラチ沿いが良好で先行・内枠圧倒的有利。速い時計が出やすい。</span></div>
+    <div class="bias-row"><span class="bias-label">最終週</span><span class="bias-val">内側が荒れて外差しが入ることもあるが、直線が短いため差しきれないケースが多い。</span></div>
+    <div class="bias-row"><span class="bias-label">夏開催</span><span class="bias-val">夏の小倉は関東・関西の有力馬が来ないため、地元厩舎・ローカル巧者の穴馬が出やすい。</span></div>
+  </div>
+  <div class="section-title">主要コース詳細</div>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1200m</div><div class="course-type">CBC賞・北九州記念の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:60%;background:#4da6ff">H</div><div class="pace-seg" style="width:35%;background:#3ecf72">M</div><div class="pace-seg" style="width:5%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎</span><span class="style-tag s-good">先行◎</span><span class="style-tag s-bad">差し△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠有利。逃げ×小倉ダの単回290%（ノリシコDB）はローカル穴馬探しの宝庫。</div>
+        <div class="blood-mini"><span class="blood-m">ロードカナロア系</span><span class="blood-m">ファインニードル</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2000m</div><div class="course-type">小倉記念（ハンデ重賞）の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:35%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:15%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-mid">差し○</span><span class="style-tag s-bad">追込△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>ハンデ戦が多く波乱が起きやすい。軽ハンデの穴馬を狙う戦略が有効。</div>
+        <div class="blood-mini"><span class="blood-m">オルフェーヴル産駒</span><span class="blood-m">キングカメハメハ系</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">ダート 1700m</div><div class="course-type">中距離ダートの主戦場</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:40%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:10%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-good">逃げ○</span><span class="style-tag s-mid">差し△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠有利。逃げ×小倉ダの単回290%という数字が示す通り前残り必至のコース。</div>
+        <div class="blood-mini"><span class="blood-m">シニスターミニスター</span><span class="blood-m">ゴールドアリュール</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 札幌 ══════ -->
+<div class="venue-panel" id="panel-sapporo">
+  <div class="venue-header">
+    <div class="venue-emblem" style="background:rgba(99,179,237,0.1)">❄️</div>
+    <div class="venue-info">
+      <h2>札幌競馬場</h2>
+      <div class="venue-tags">
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">右回り</span>
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">洋芝（欧州型）</span>
+        <span class="vtag" style="background:rgba(99,179,237,0.1);color:#4da6ff;border:1px solid rgba(99,179,237,0.2)">直線264m</span>
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">平坦（坂なし）</span>
+      </div>
+    </div>
+  </div>
+  <div class="bias-box">
+    <div class="bias-title">📋 札幌競馬場の基本特性</div>
+    <div class="bias-row"><span class="bias-label">コースの特徴</span><span class="bias-val">洋芝を使用する特殊な競馬場。芝が深く時計がかかりやすい。欧州血統が特に適性を示す。直線が264mと短く先行有利。夏開催（7〜8月）のみ使用。</span></div>
+    <div class="bias-row"><span class="bias-label">血統の特殊性</span><span class="bias-val">ハービンジャー・欧州ノーザンダンサー系が他の競馬場より大きく有利。キタサンブラック産駒も洋芝適性が高い。</span></div>
+    <div class="bias-row"><span class="bias-label">穴馬狙いのポイント</span><span class="bias-val">中央のG1実績馬より洋芝慣れした北海道巧者を狙う方が回収率が高い傾向。</span></div>
+  </div>
+  <div class="section-title">主要コース詳細</div>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1200m</div><div class="course-type">洋芝スプリント</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:45%;background:#4da6ff">H</div><div class="pace-seg" style="width:45%;background:#3ecf72">M</div><div class="pace-seg" style="width:10%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎</span><span class="style-tag s-good">先行◎</span><span class="style-tag s-bad">差し△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>洋芝でパワーが問われる。欧州系スプリンターが台頭しやすい。</div>
+        <div class="blood-mini"><span class="blood-m">ハービンジャー系</span><span class="blood-m">欧州ND系</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2000m</div><div class="course-type">札幌記念の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:30%;background:#4da6ff">H</div><div class="pace-seg" style="width:55%;background:#3ecf72">M</div><div class="pace-seg" style="width:15%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-mid">差し○</span><span class="style-tag s-bad">追込△</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>洋芝でパワーとスタミナが問われる。キタサンブラック産駒・ハービンジャー系が強い。</div>
+        <div class="blood-mini"><span class="blood-m">キタサンブラック</span><span class="blood-m">ハービンジャー</span><span class="blood-m">ハーツクライ</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 函館 ══════ -->
+<div class="venue-panel" id="panel-hakodate">
+  <div class="venue-header">
+    <div class="venue-emblem" style="background:rgba(62,207,114,0.1)">🌊</div>
+    <div class="venue-info">
+      <h2>函館競馬場</h2>
+      <div class="venue-tags">
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">右回り</span>
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">洋芝（欧州型）</span>
+        <span class="vtag" style="background:rgba(62,207,114,0.1);color:#3ecf72;border:1px solid rgba(62,207,114,0.2)">直線262m（最短）</span>
+        <span class="vtag" style="background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2)">平坦（坂なし）</span>
+      </div>
+    </div>
+  </div>
+  <div class="bias-box">
+    <div class="bias-title">📋 函館競馬場の基本特性</div>
+    <div class="bias-row"><span class="bias-label">コースの特徴</span><span class="bias-val">JRA最短の直線（262m）と洋芝の組み合わせ。先行力が最も重要な競馬場。コーナーが急で外を回るとロスが大きい。逃げ×函館ダの単回288%（ノリシコDB）という驚異的な数字。</span></div>
+    <div class="bias-row"><span class="bias-label">血統の特殊性</span><span class="bias-val">洋芝×短い直線で欧州血統・パワー型が特に有利。モーリス産駒の函館芝での単回137%も注目。</span></div>
+    <div class="bias-row"><span class="bias-label">穴馬狙いポイント</span><span class="bias-val">逃げ馬を素直に評価するのが函館攻略の基本。差しは「届いてもわずかな差」になりやすい。</span></div>
+  </div>
+  <div class="section-title">主要コース詳細</div>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 1200m</div><div class="course-type">函館スプリントSの舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:55%;background:#4da6ff">H</div><div class="pace-seg" style="width:40%;background:#3ecf72">M</div><div class="pace-seg" style="width:5%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎◎</span><span class="style-tag s-good">先行◎</span><span class="style-tag s-bad">差し✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>内枠が絶対的有利。逃げ馬は素直に買う。差し馬の評価を大幅に下げるべきコース。</div>
+        <div class="blood-mini"><span class="blood-m">洋芝適性のある血統</span><span class="blood-m">欧州ND系</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">芝 2000m</div><div class="course-type">函館記念の舞台</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:35%;background:#4da6ff">H</div><div class="pace-seg" style="width:50%;background:#3ecf72">M</div><div class="pace-seg" style="width:15%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">先行◎</span><span class="style-tag s-good">逃げ○</span><span class="style-tag s-bad">追込✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>洋芝のスタミナ勝負。直線が短く前が圧倒的有利。ハービンジャー系が毎年好走。</div>
+        <div class="blood-mini"><span class="blood-m">ハービンジャー系</span><span class="blood-m">モーリス産駒</span><span class="blood-m">キズナ</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-head"><div class="course-dist">ダート 1000m</div><div class="course-type">逃げ×ダート天国</div></div>
+      <div class="course-card-body">
+        <div class="pace-label">ペース傾向</div>
+        <div class="pace-bar"><div class="pace-seg" style="width:80%;background:#4da6ff">H</div><div class="pace-seg" style="width:20%;background:#3ecf72">M</div><div class="pace-seg" style="width:0%;background:#f5c842">S</div></div>
+        <div class="style-row"><span class="style-tag s-good">逃げ◎◎◎</span><span class="style-tag s-mid">先行○</span><span class="style-tag s-bad">差し✕✕</span></div>
+        <div class="gate-row"><span class="gate-icon">🔲</span>逃げの単回288%・複回231%（ノリシコDB）。とにかく逃げ馬を買う1択に近いコース。</div>
+        <div class="blood-mini"><span class="blood-m">パイロ</span><span class="blood-m">シニスターミニスター</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 比較チャート ══════ -->
+<div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border)">
+  <div class="section-title">全競馬場 直線距離・特性 比較表</div>
+  <div class="overview-wrap">
+    <table class="overview-table">
+      <thead>
+        <tr><th>競馬場</th><th>回り</th><th>芝の種類</th><th>直線（外）</th><th>坂</th><th>先行有利度</th><th>得意血統系</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="ot-venue">東京</td><td>左</td><td>野芝</td><td class="ot-dist">525m ★最長</td><td>1回</td><td>⭐⭐⭐</td><td>ディープ系・ハーツクライ</td></tr>
+        <tr><td class="ot-venue">新潟（外）</td><td>左</td><td>野芝</td><td class="ot-dist">658m ★絶対最長</td><td>なし</td><td>⭐⭐</td><td>スピード型・イスラボニータ</td></tr>
+        <tr><td class="ot-venue">中京</td><td>左</td><td>野芝</td><td class="ot-dist">412m</td><td>1回</td><td>⭐⭐⭐</td><td>キズナ・ドレフォン</td></tr>
+        <tr><td class="ot-venue">阪神（外）</td><td>右</td><td>野芝</td><td class="ot-dist">473m</td><td>1回</td><td>⭐⭐⭐</td><td>ディープ系・エピファネイア</td></tr>
+        <tr><td class="ot-venue">京都（外）</td><td>右</td><td>野芝</td><td class="ot-dist">404m</td><td>なし（淀坂）</td><td>⭐⭐⭐</td><td>ディープ系・ハーツクライ</td></tr>
+        <tr><td class="ot-venue">中山</td><td>右</td><td>野芝</td><td class="ot-dist">310m</td><td>2回</td><td>⭐⭐⭐⭐⭐</td><td>ロベルト系・ステイゴールド</td></tr>
+        <tr><td class="ot-venue">阪神（内）</td><td>右</td><td>野芝</td><td class="ot-dist">356m</td><td>1回</td><td>⭐⭐⭐⭐</td><td>パワー型全般</td></tr>
+        <tr><td class="ot-venue">小倉</td><td>右</td><td>混合</td><td class="ot-dist">293m</td><td>なし</td><td>⭐⭐⭐⭐⭐</td><td>逃げ先行全般</td></tr>
+        <tr><td class="ot-venue">福島</td><td>右</td><td>野芝</td><td class="ot-dist">292m</td><td>なし</td><td>⭐⭐⭐⭐⭐</td><td>逃げ先行全般</td></tr>
+        <tr><td class="ot-venue">札幌</td><td>右</td><td>洋芝</td><td class="ot-dist">264m</td><td>なし</td><td>⭐⭐⭐⭐</td><td>ハービンジャー系・欧州型</td></tr>
+        <tr><td class="ot-venue">函館</td><td>右</td><td>洋芝</td><td class="ot-dist">262m ★最短</td><td>なし</td><td>⭐⭐⭐⭐⭐</td><td>洋芝適性の欧州系全般</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+function showVenue(id) {
+  document.querySelectorAll('.venue-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.vtab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: document.querySelector('.venue-nav').offsetTop - 10, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>

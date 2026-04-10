@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>期待値条件 - ノリシコ競馬塾</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="index.html">トップ</a></li>
+      <li><a href="pedigree.html">血統</a></li>
+      <li><a href="course.html">コース</a></li>
+      <li><a href="affinity.html" class="active">期待値</a></li>
+      <li><a href="quiz.html">クイズ</a></li>
+      <li><a href="glossary.html">用語集</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <h1>期待値条件<br><em>「買い続けたら勝てる」条件を探す</em></h1>
+    <div class="hero-sub">過去7年・約33万レースの実データから、単勝・複勝の回収率が100%を超える条件を会場別に抽出。距離延長・短縮の期待値条件も掲載。</div>
+  </div>
+
+  <main>
+
+    <!-- ページ内ナビ -->
+    <div class="venue-tabs" style="margin-bottom:24px;justify-content:center">
+      <a href="#data1" class="venue-tab active" style="text-decoration:none">狙い目（種牡馬×距離）</a>
+      <a href="#data2" class="venue-tab" style="text-decoration:none">ピンポイント（×枠順）</a>
+      <a href="#data3" class="venue-tab" style="text-decoration:none">距離変更で化ける</a>
+    </div>
+
+    <!-- 解説 -->
+    <div class="chapter">
+      <div class="ch-label">
+        <div class="ch-num">基礎</div>
+        <div class="ch-title">期待値条件の<em>読み方と使い方</em></div>
+      </div>
+      <div class="body-text">「単勝回収率200%」＝<strong>100円が200円になる条件</strong>。100%を超えていれば「この条件だけ買い続ければプラスになった」という実績です。3着内率は<a href="glossary.html" class="glossary-link">複勝</a>の的中率の目安で、<strong>30%超えなら優秀</strong>です。</div>
+
+      <div class="point-box"><strong>注意：</strong>過去データの結果であり将来の保証ではありません。出走数が少ないほどブレが大きい。<strong>出走30回以上</strong>を最低ライン、50回以上はより信頼度高。回収率200%超はゴールド、100%超はグリーンで表示しています。</div>
+
+      <div class="example">
+        <div class="example-head">
+          <div class="ex-badge">使い方</div>
+          <div class="ex-title">出馬表を見ながらこのページを使う</div>
+        </div>
+        <div class="ex-body">
+          ① 今日のレースの<strong>会場タブ</strong>を選ぶ（例：東京）<br>
+          ② 出馬表の各馬の父名をチェック<br>
+          ③ この一覧に該当する種牡馬がいたら<em>期待値候補としてマーク</em><br>
+          ④ 距離変更（延長/短縮）にも該当するかチェック<br>
+          ⑤ オッズと照合して馬券に反映
+        </div>
+      </div>
+    </div>
+
+    <!-- 会場別：血統×コース×距離 -->
+    <div class="chapter" id="data1">
+      <div class="ch-label">
+        <div class="ch-num">狙い目</div>
+        <div class="ch-title">会場別 — <em>この種牡馬×この距離なら買い</em></div>
+      </div>
+      <div class="body-text">過去7年の全レースデータから、<strong>出走30回以上 かつ 単勝回収率100%超</strong>の条件を抽出。会場タブで切り替えて確認できます。</div>
+
+      <div class="venue-tabs" id="broad-tabs"></div>
+      <div class="venue-tabs" id="broad-surface-tabs"></div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>種牡馬</th>
+              <th>出走数</th>
+              <th>勝利数</th>
+              <th>単勝回収率</th>
+              <th>複勝回収率</th>
+              <th>3着内率</th>
+            </tr>
+          </thead>
+          <tbody id="broad-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 会場別：血統×コース×距離×枠 -->
+    <div class="chapter" id="data2">
+      <div class="ch-label">
+        <div class="ch-num">ピンポイント</div>
+        <div class="ch-title">会場別 — <em>枠順まで絞った狙い目</em></div>
+      </div>
+      <div class="body-text">過去7年のデータから、<strong>出走20回以上 かつ 単勝or複勝の回収率100%超</strong>の条件を抽出。枠順まで絞り込んだピンポイントの期待値条件です。</div>
+
+      <div class="venue-tabs" id="hotspot-tabs"></div>
+      <div class="venue-tabs" id="hotspot-surface-tabs"></div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>種牡馬</th>
+              <th>馬場</th>
+              <th>距離</th>
+              <th>枠</th>
+              <th>出走数</th>
+              <th>勝率</th>
+              <th>単勝回収率</th>
+              <th>複勝回収率</th>
+            </tr>
+          </thead>
+          <tbody id="hotspot-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 距離変更 -->
+    <div class="chapter" id="data3">
+      <div class="ch-label">
+        <div class="ch-num">距離変更</div>
+        <div class="ch-title">延長・短縮で<em>化ける種牡馬</em></div>
+      </div>
+      <div class="body-text">前走から距離が変わった時に期待値が生まれる条件。「この種牡馬は距離延長で激走する」「短縮で好走率が上がる」というパターンを抽出しています。</div>
+
+      <div class="point-box"><strong>延長と短縮の基本：</strong>一般にスタミナ型の血統は<strong>距離延長</strong>で上昇、スピード型は<strong>距離短縮</strong>で上昇する傾向があります。ただし「延長なのにスプリント血統が好走」のような逆張り条件こそ、大衆が見落とすため<em>高い期待値を生みやすい</em>。</div>
+
+      <div class="venue-tabs" id="dc-tabs">
+        <button class="venue-tab active" data-dc="延長">距離延長</button>
+        <button class="venue-tab" data-dc="短縮">距離短縮</button>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>種牡馬</th>
+              <th>会場</th>
+              <th>馬場</th>
+              <th>距離</th>
+              <th>出走数</th>
+              <th>勝利数</th>
+              <th>単勝回収率</th>
+              <th>3着内率</th>
+            </tr>
+          </thead>
+          <tbody id="dc-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="next-page">
+      <a href="quiz.html">
+        <div class="np-label">知識を試してみる</div>
+        <div class="np-title">理解度クイズに挑戦 →</div>
+      </a>
+      <a href="pedigree.html">
+        <div class="np-label">血統の基礎を復習するなら</div>
+        <div class="np-title">血統入門ガイド →</div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>ノリシコ競馬塾</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
